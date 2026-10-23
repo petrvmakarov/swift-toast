@@ -52,9 +52,9 @@ struct ToastMessageView<LeftAccessory: View, RightAccessory: View>: View {
         self.leftAccessory = leftAccessory()
         self.rightAccessory = rightAccessory()
     }
-    
+
     var body: some View {
-        if #available(iOS 26.0, macOS 26.0, *), liquidGlassEnabled {
+        if #available(iOS 26.0, macOS 26.0, watchOS 26.0, tvOS 26.0, macCatalyst 26.0,  *), liquidGlassEnabled {
             liquidGlassBody
         }
         else {
@@ -62,7 +62,7 @@ struct ToastMessageView<LeftAccessory: View, RightAccessory: View>: View {
         }
     }
     
-    @available(iOS 26.0, macOS 26.0, *)
+    @available(iOS 26.0, macOS 26.0, watchOS 26.0, tvOS 26.0, macCatalyst 26.0, *)
     private var liquidGlassBody: some View {
         internalBody
             .glassEffect(
@@ -79,7 +79,6 @@ struct ToastMessageView<LeftAccessory: View, RightAccessory: View>: View {
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .fill(backgroundColor)
             }
-            
     }
 
    private var internalBody: some View {
@@ -120,6 +119,7 @@ struct ToastMessageView<LeftAccessory: View, RightAccessory: View>: View {
     
     ToastMessageView(
         title: "This is a title",
+        liquidGlassEnabled: true,
     )
     
     ToastMessageView(
