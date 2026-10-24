@@ -9,7 +9,7 @@ public struct ContentView: View {
     public var body: some View {
         Text("Hello toast!")
         Button {
-            showToast(.info(TitleAndMessage(title:"hello", message:"from toast")))
+            showToast(ToastType<String>.info(TitleAndMessage(title: "hello", message: "from toast")))
         } label: {
             Text("Press me")
         }
@@ -17,5 +17,10 @@ public struct ContentView: View {
 }
 
 #Preview {
-    ContentView().withToast()
+    VStack {
+        Spacer()
+        ContentView()
+        Spacer()
+    }
+        .withToast()
 }
