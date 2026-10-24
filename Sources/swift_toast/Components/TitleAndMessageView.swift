@@ -1,0 +1,56 @@
+//
+//  TitleAndMessageView.swift
+//  SwiftToast
+//
+//  Created by Petr Makarov on 24/10/2026.
+//
+
+import SwiftUI
+
+struct TitleAndMessageView: View {
+    var title: String? = nil
+    var message: String? = nil
+    var titleLinesLimit: Int? = nil
+    var messageLinesLimit: Int? = nil
+    var messageTitleSpacing: CGFloat? = nil
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: messageTitleSpacing) {
+            if let title {
+                Text(title)
+                    .lineLimit(titleLinesLimit)
+            }
+            if let message {
+                Text(message)
+                    .lineLimit(messageLinesLimit)
+            }
+        }
+    }
+}
+
+#Preview {
+    TitleAndMessageView(
+        title: "This is a title",
+        message: "This is a message"
+    )
+    
+    TitleAndMessageView(
+        title: "This is a title",
+        message: "This is a message",
+        messageTitleSpacing: 15
+    )
+    
+    TitleAndMessageView(
+        title: "This is a title",
+    )
+    
+    TitleAndMessageView(
+        message: "This is a message"
+    )
+    
+    TitleAndMessageView(
+        title: "This is a title",
+        message: "This is a message a long long looooooooooooooooooooooooooooooong message long long long long long long long long long long long long long long long long message",
+        messageLinesLimit: 3
+    )
+}
