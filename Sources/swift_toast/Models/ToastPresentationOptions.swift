@@ -7,10 +7,17 @@
 
 import SwiftUI
 
+public struct TitleAndMessage {
+    let title: (any StringProtocol)?
+    let message: (any StringProtocol)?
 
-struct TitleAndMessage {
-    let title: StringProtocol? = nil
-    let message: StringProtocol? = nil
+    public init(
+        title: (any StringProtocol)? = nil,
+        message: (any StringProtocol)? = nil
+    ) {
+        self.title = title
+        self.message = message
+    }
 }
 
 @MainActor
@@ -23,14 +30,14 @@ func renderTitleAndMessageView(_ data: Any) -> some View {
         )
     }
 }
- 
-struct ToastPresentationOptions<TData: Hashable> {
+
+public struct ToastPresentationOptions<TData: Hashable> {
     let messageViewOptions: ToastMessageViewOptions
     let renderMessage: @MainActor (_ data: TData) -> any View
     let renderLeftAccessory: @MainActor (_ data: TData) -> any View
     let renderRightAccessory: @MainActor (_ data: TData) -> any View
 
-    init(
+    public init(
         messageViewOptions: ToastMessageViewOptions = ToastMessageViewOptions.default,
         renderMessage: @escaping @MainActor (_ data: TData) -> any View,
         renderLeftAccessory: @escaping @MainActor (_ data: TData) -> any View = { _ in EmptyView() },
@@ -42,8 +49,3 @@ struct ToastPresentationOptions<TData: Hashable> {
         self.renderRightAccessory = renderRightAccessory
     }
 }
-
-
-
-
-

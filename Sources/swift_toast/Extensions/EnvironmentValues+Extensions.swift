@@ -8,6 +8,6 @@
 import SwiftUI
 
 extension EnvironmentValues {
-    @Entry var showToast = ShowToastAction(action: { _, _, _ in })
+    @Entry public var showToast = ShowToastAction(action: { _, _, _ in })
     @Entry var dismissToast: () -> Void = { }
 }

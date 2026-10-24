@@ -8,7 +8,19 @@
 import Foundation
 import SwiftUI
 
-fileprivate let DEFAULT_DISMISS_TIMEOUT: TimeInterval = 2.0
+public struct ShowToastAction {
+    typealias Action = (AnyToastType, ToastPlacement, TimeInterval) -> Void
+    let action: Action
+
+    @MainActor
+    public func callAsFunction<TData: Hashable>(
+        _ type: ToastType<TData>,
+        placement: ToastPlacement = .top,
+        dismissAfter: TimeInterval = 2.0
+    ) {
+        action(AnyToastType(type), placement, dismissAfter)
+    }
+}
 
 struct AnyToastType {
     private let render: @MainActor () -> AnyView
@@ -49,19 +61,5 @@ struct AnyToastType {
     @MainActor
     func renderView() -> AnyView {
         render()
-    }
-}
-
-struct ShowToastAction {
-    typealias Action = (AnyToastType, ToastPlacement, TimeInterval) -> Void
-    let action: Action
-
-    @MainActor
-    func callAsFunction<TData: Hashable>(
-        _ type: ToastType<TData>,
-        placement: ToastPlacement = .top,
-        dismissAfter: TimeInterval = DEFAULT_DISMISS_TIMEOUT
-    ) {
-        action(AnyToastType(type), placement, dismissAfter)
     }
 }

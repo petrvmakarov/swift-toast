@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-enum ToastType<TData: Hashable> {
+public enum ToastType<TData: Hashable> {
     case info(TitleAndMessage)
     case success(TitleAndMessage)
     case warning(TitleAndMessage)
@@ -26,7 +26,7 @@ enum ToastType<TData: Hashable> {
 }
 
 
-extension ToastType<String> {
+public extension ToastType<String> {
     static func showString(_ message: String) -> ToastType<String> {
         .custom(message, ToastPresentationOptions(
             renderMessage: { s in Text(s) }
