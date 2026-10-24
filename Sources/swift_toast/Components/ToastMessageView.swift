@@ -12,7 +12,6 @@ struct ToastMessageView<
     LeftAccessory: View,
     RightAccessory: View
 >: View {
-
     private let options: ToastMessageViewOptions
     private let message: Message
     private let leftAccessory: LeftAccessory
