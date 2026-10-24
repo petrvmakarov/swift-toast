@@ -7,17 +7,6 @@
 
 import SwiftUI
 
-private let defaultCornerRadius: CGFloat = 32
-private let defaultBackgroundColor: Color = .gray
-private let defaultAccessoryViewSpacing: CGFloat = 12
-
-struct ToastMessageViewOptions {
-    var cornerRadius: CGFloat = defaultCornerRadius
-    var backgroundColor: Color = defaultBackgroundColor
-    var accessoryViewSpacing: CGFloat = defaultAccessoryViewSpacing
-    var liquidGlassEnabled: Bool = false
-}
-
 struct ToastMessageView<
     Message: View,
     LeftAccessory: View,
@@ -30,7 +19,7 @@ struct ToastMessageView<
     private let rightAccessory: RightAccessory
     
     init(
-        _ options: ToastMessageViewOptions = ToastMessageViewOptions(),
+        _ options: ToastMessageViewOptions = ToastMessageViewOptions.default,
         @ViewBuilder message: () -> Message = { EmptyView() },
         @ViewBuilder leftAccessory: () -> LeftAccessory = { EmptyView() },
         @ViewBuilder rightAccessory: () -> RightAccessory = { EmptyView() },
