@@ -1,4 +1,5 @@
 import SwiftUI
+import swift_toast
 
 public struct ContentView: View {
 //    @Environment(\.showToast) private var showToast
@@ -11,5 +12,5 @@ public struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView().withToast()
 }

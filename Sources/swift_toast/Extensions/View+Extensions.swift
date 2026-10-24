@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension View {
-    func withToast() -> some View {
+    public func withToast() -> some View {
         modifier(ToastModifier())
     }
 }
