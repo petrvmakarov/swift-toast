@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct TitleAndMessageView: View {
-    var title: String? = nil
-    var message: String? = nil
+    var title: any StringProtocol? = nil
+    var message: any StringProtocol? = nil
     var titleLinesLimit: Int? = nil
     var messageLinesLimit: Int? = nil
     var messageTitleSpacing: CGFloat? = nil
