@@ -10,21 +10,45 @@ import SwiftUI
 
 fileprivate let DEFAULT_DISMISS_TIMEOUT: TimeInterval = 2.0
 
-extension EnvironmentValues {
-    @Entry var showToast = ShowToastAction(action: { _, _, _ in })
-}
-
 struct AnyToastType {
-    private let storage: Any
+    private let render: @MainActor () -> AnyView
 
+    @MainActor
     init<TData: Hashable>(_ type: ToastType<TData>) {
-        storage = type
+        render = {
+            switch type {
+            case .custom(let data, let presentationOptions):
+                return AnyView(
+                    ToastMessageView(
+                        presentationOptions.messageViewOptions,
+                        message: { AnyView(presentationOptions.renderMessage(data)) },
+                        leftAccessory: { AnyView(presentationOptions.renderLeftAccessory(data)) },
+                        rightAccessory: { AnyView(presentationOptions.renderRightAccessory(data)) }
+                    )
+                )
+            case .info(let titleAndMessage),
+                 .success(let titleAndMessage),
+                 .warning(let titleAndMessage),
+                 .error(let titleAndMessage):
+                return AnyView(
+                    ToastMessageView(
+                        message: {
+                            TitleAndMessageView(
+                                title: titleAndMessage.title,
+                                message: titleAndMessage.message
+                            )
+                        },
+                        leftAccessory: { EmptyView() },
+                        rightAccessory: { EmptyView() }
+                    )
+                )
+            }
+        }
     }
 
-    func value<TData: Hashable>(
-        as dataType: TData.Type = TData.self
-    ) -> ToastType<TData>? {
-        storage as? ToastType<TData>
+    @MainActor
+    func renderView() -> AnyView {
+        render()
     }
 }
 
@@ -32,6 +56,7 @@ struct ShowToastAction {
     typealias Action = (AnyToastType, ToastPlacement, TimeInterval) -> Void
     let action: Action
 
+    @MainActor
     func callAsFunction<TData: Hashable>(
         _ type: ToastType<TData>,
         placement: ToastPlacement = .top,
