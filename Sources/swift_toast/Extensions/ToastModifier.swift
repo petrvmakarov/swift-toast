@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct ToastModifier: ViewModifier {
-    @State private var type: AnyToastType?
+    @State private var type: ToastType?
     @State private var placement: ToastPlacement = .top
     @State private var disappearAfter: TimeInterval = 2.0
     @State private var dismissTask: DispatchWorkItem?
@@ -20,7 +20,7 @@ public struct ToastModifier: ViewModifier {
     }
     
     func onShow(
-        _ type: AnyToastType,
+        _ type: ToastType,
         placement: ToastPlacement,
         dismissAfter: TimeInterval
     ) {

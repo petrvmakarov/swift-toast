@@ -7,14 +7,28 @@
 
 import SwiftUI
 
-struct TitleAndMessageView: View {
+package struct TitleAndMessageView: View {
     var title: any StringProtocol? = nil
     var message: any StringProtocol? = nil
     var titleLinesLimit: Int? = nil
     var messageLinesLimit: Int? = nil
     var messageTitleSpacing: CGFloat? = nil
+
+    package init(
+        title: (any StringProtocol)? = nil,
+        message: (any StringProtocol)? = nil,
+        titleLinesLimit: Int? = nil,
+        messageLinesLimit: Int? = nil,
+        messageTitleSpacing: CGFloat? = nil
+    ) {
+        self.title = title
+        self.message = message
+        self.titleLinesLimit = titleLinesLimit
+        self.messageLinesLimit = messageLinesLimit
+        self.messageTitleSpacing = messageTitleSpacing
+    }
     
-    var body: some View {
+    package var body: some View {
         VStack(alignment: .leading, spacing: messageTitleSpacing) {
             if let title {
                 Text(title)

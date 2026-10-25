@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ToastMessageView<
+package struct ToastMessageView<
     Message: View,
     LeftAccessory: View,
     RightAccessory: View
@@ -17,7 +17,7 @@ struct ToastMessageView<
     private let leftAccessory: LeftAccessory
     private let rightAccessory: RightAccessory
     
-    init(
+    package init(
         _ options: ToastMessageViewOptions = ToastMessageViewOptions.default,
         @ViewBuilder message: () -> Message = { EmptyView() },
         @ViewBuilder leftAccessory: () -> LeftAccessory = { EmptyView() },
@@ -29,7 +29,7 @@ struct ToastMessageView<
         self.rightAccessory = rightAccessory()
     }
     
-    var body: some View {
+    package var body: some View {
         if #available(iOS 26.0, macOS 26.0, watchOS 26.0, tvOS 26.0, macCatalyst 26.0,  *), options.liquidGlassEnabled {
             liquidGlassBody
         }

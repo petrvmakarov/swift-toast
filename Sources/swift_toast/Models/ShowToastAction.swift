@@ -9,57 +9,15 @@ import Foundation
 import SwiftUI
 
 public struct ShowToastAction {
-    typealias Action = (AnyToastType, ToastPlacement, TimeInterval) -> Void
+    typealias Action = (ToastType, ToastPlacement, TimeInterval) -> Void
     let action: Action
 
     @MainActor
-    public func callAsFunction<TData: Hashable>(
-        _ type: ToastType<TData>,
+    public func callAsFunction(
+        _ type: ToastType,
         placement: ToastPlacement = .top,
         dismissAfter: TimeInterval = 2.0
     ) {
-        action(AnyToastType(type), placement, dismissAfter)
-    }
-}
-
-struct AnyToastType {
-    private let render: @MainActor () -> AnyView
-
-    @MainActor
-    init<TData: Hashable>(_ type: ToastType<TData>) {
-        render = {
-            switch type {
-            case .custom(let data, let presentationOptions):
-                return AnyView(
-                    ToastMessageView(
-                        presentationOptions.messageViewOptions,
-                        message: { AnyView(presentationOptions.renderMessage(data)) },
-                        leftAccessory: { AnyView(presentationOptions.renderLeftAccessory(data)) },
-                        rightAccessory: { AnyView(presentationOptions.renderRightAccessory(data)) }
-                    )
-                )
-            case .info(let titleAndMessage),
-                 .success(let titleAndMessage),
-                 .warning(let titleAndMessage),
-                 .error(let titleAndMessage):
-                return AnyView(
-                    ToastMessageView(
-                        message: {
-                            TitleAndMessageView(
-                                title: titleAndMessage.title,
-                                message: titleAndMessage.message
-                            )
-                        },
-                        leftAccessory: { EmptyView() },
-                        rightAccessory: { EmptyView() }
-                    )
-                )
-            }
-        }
-    }
-
-    @MainActor
-    func renderView() -> AnyView {
-        render()
+        action(type, placement, dismissAfter)
     }
 }
