@@ -7,10 +7,15 @@
 
 import SwiftUI
 
-fileprivate let isLiquidGlassAvailable = SystemHelper.isLiquidGlassAvailable()
-
 public struct ToastMessageViewOptions {
-    public static var `default`: ToastMessageViewOptions { ToastMessageViewOptions() }
+    public static var `default`: ToastMessageViewOptions { ToastMessageViewOptions(
+        cornerRadius: 32,
+        backgroundColor: .clear,
+        internalSpacing: 5,
+        externalSpacing: 10,
+        liquidGlassEnabled: false,
+        stretched: false
+    ) }
 
     public var cornerRadius: CGFloat
     public var backgroundColor: Color
@@ -19,30 +24,21 @@ public struct ToastMessageViewOptions {
     public var liquidGlassEnabled: Bool
     public var stretched: Bool
     
-    private static func evaluateDefaultBackgroundColor(isLiquidGlassEnabled: Bool) -> Color {
-        if isLiquidGlassAvailable && isLiquidGlassEnabled {
-            return .clear
-        }
-        return Color.adaptive(light: "#0C0F1A", lightOpacity: 0.66, dark: "#FFFFFF", darkOpacity: 0.48)
+    
+    package init(
+        cornerRadius: CGFloat? = nil,
+        backgroundColor: Color? = nil,
+        internalSpacing: CGFloat? = nil,
+        externalSpacing: CGFloat? = nil,
+        liquidGlassEnabled: Bool? = nil,
+        stretched: Bool? = nil
+    ) {
+        self.backgroundColor = backgroundColor ?? Self.default.backgroundColor
+        self.cornerRadius = cornerRadius ?? Self.default.cornerRadius
+        self.internalSpacing = internalSpacing ?? Self.default.internalSpacing
+        self.externalSpacing = externalSpacing ?? Self.default.externalSpacing
+        self.liquidGlassEnabled = liquidGlassEnabled ?? Self.default.liquidGlassEnabled
+        self.stretched = stretched ?? Self.default.stretched
     }
 
-    public init(
-        cornerRadius: CGFloat = 32,
-        backgroundColor: Color? = nil,
-        internalSpacing: CGFloat = 5,
-        externalSpacing: CGFloat = 10,
-        liquidGlassEnabled: Bool = false,
-        stretched: Bool = false
-    ) {
-        if let backgroundColor {
-            self.backgroundColor = backgroundColor
-        } else {
-            self.backgroundColor = Self.evaluateDefaultBackgroundColor(isLiquidGlassEnabled: liquidGlassEnabled)
-        }
-        self.cornerRadius = cornerRadius
-        self.internalSpacing = internalSpacing
-        self.externalSpacing = externalSpacing
-        self.liquidGlassEnabled = liquidGlassEnabled
-        self.stretched = stretched
-    }
 }

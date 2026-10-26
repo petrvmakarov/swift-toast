@@ -12,7 +12,22 @@ public struct ContentView: View {
             showToast(.info(title: "hello", message: "from toast"))
             //showToast(.showString("custom text"), placement: .bottom, dismissAfter: 10)
         } label: {
-            Text("Press me")
+            Text("Info")
+        }
+        Button {
+            showToast(.success(title: "hello", message: "from toast"))
+        } label: {
+            Text("Success")
+        }
+        Button {
+            showToast(.warning(title: "hello", message: "from toast"))
+        } label: {
+            Text("Warning")
+        }
+        Button {
+            showToast(.error(title: "hello", message: "from toast"))
+        } label: {
+            Text("Error")
         }
     }
 }

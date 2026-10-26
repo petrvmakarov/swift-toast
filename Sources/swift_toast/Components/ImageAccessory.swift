@@ -7,11 +7,19 @@
 
 import SwiftUI
 
+public struct ImageAccessoryOptions {
+    var forgroundColor: Color = .accentColor
+}
+
 public struct ImageAccessory: View {
     private var source: ImageSource
+    private var options: ImageAccessoryOptions
     
-    public init(_ source: ImageSource) {
+    public init(
+        _ source: ImageSource,
+        withOptions options: ImageAccessoryOptions? = nil) {
         self.source = source
+        self.options = options ?? ImageAccessoryOptions()
     }
     
     public var body: some View {
@@ -20,7 +28,7 @@ public struct ImageAccessory: View {
                 .resizable()
                     .scaledToFit()
                     .frame(width: 25, height: 25)
-            .foregroundStyle(.red)
+                    .foregroundStyle(options.forgroundColor)
         }
         //.frame(maxHeight: 44)
         //.frame(width: 44)

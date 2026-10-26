@@ -51,7 +51,20 @@ public struct ImageButton: View {
 }
 
 #Preview {
-    ImageButton(.systemName("xmark"), withOptions: .init(forgroundColor: .red)) {
-        print("xmark tapped")
+    VStack {
+        Spacer()
+        ImageButton(.systemName("xmark"), withOptions: .init(forgroundColor: .red)) {
+            print("xmark tapped")
+        }
+        
+        ImageButton(.systemName("xmark"), withOptions: .init(forgroundColor: .blue, backgroundColor: nil)) {
+            print("xmark tapped")
+        }
+        
+        ImageButton(.systemName("xmark"), withOptions: .init(forgroundColor: .yellow, backgroundColor: nil)) {
+            print("xmark tapped")
+        }
+        Spacer()
     }
+    
 }
