@@ -9,8 +9,8 @@ public struct ContentView: View {
     public var body: some View {
         Text("Hello toast!")
         Button {
-           // showToast(.info(title: "hello", message: "from toast"))
-            showToast(.showString("custom text"), placement: .bottom, dismissAfter: 10)
+            showToast(.info(title: "hello", message: "from toast"))
+            //showToast(.showString("custom text"), placement: .bottom, dismissAfter: 10)
         } label: {
             Text("Press me")
         }

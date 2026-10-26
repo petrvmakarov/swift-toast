@@ -54,20 +54,26 @@ package struct ToastMessageView<
             .background {
                 RoundedRectangle(cornerRadius: options.cornerRadius)
                     .fill(options.backgroundColor)
+                    .shadow(radius: 3)
             }
+            
     }
     
     private var internalBody: some View {
-        HStack(spacing: options.accessoryViewSpacing) {
+        HStack(spacing: options.internalSpacing) {
+            
             leftAccessory
             
             message
             
-            Spacer(minLength: 0)
+            if options.stretched {
+                Spacer(minLength: 0)
+            }
             
             rightAccessory
+            
         }
-        .padding()
+        .padding(options.externalSpacing)
     }
 }
 
@@ -125,4 +131,75 @@ package struct ToastMessageView<
                 .foregroundStyle(.black)
         }
     }
+    
+    ToastMessageView(ToastMessageViewOptions(liquidGlassEnabled: true)) {
+        TitleAndMessageView(
+            title: "Canvas paused",
+        )
+    } leftAccessory: {
+        HStack(spacing: 0) {
+            Spacer()
+            Image(systemName: "checkmark.circle.fill")
+                .resizable()
+                    .scaledToFit()
+                    .frame(width: 25, height: 25)
+            .foregroundStyle(.red)
+            Spacer()
+        }
+        .frame(maxHeight: 44)
+        .frame(width: 44)
+        //.background(.blue)
+        .padding(0)
+    } rightAccessory: {
+        Button {
+            // Dismiss toast
+        } label: {
+            HStack(spacing: 0) {
+                Image(systemName: "xmark")
+                    .foregroundStyle(.red)
+                    .background {
+                        Circle()
+                            .fill(.red.opacity(0.5).blendMode(.lighten))
+                            .frame(width: 28, height: 28)
+                    }
+            }
+            .frame(maxHeight: 44)
+            .frame(width: 44)
+        }
+    }
+    .frame(height: 44)
+}
+
+#Preview("Product ready") {
+    
+    ToastMessageView(ToastMessageViewOptions(liquidGlassEnabled: true)) {
+        TitleAndMessageView(
+            title: "Canvas paused",
+        )
+    } leftAccessory: {
+        ImageAccessory(.systemName("checkmark.circle.fill"))
+    } rightAccessory: {
+        ImageButton(
+            .systemName("xmark"),
+            withOptions: .init(forgroundColor: .red)
+        ) {
+            print("xmark tapped")
+        }
+    }
+    
+    ToastMessageView(ToastMessageViewOptions(liquidGlassEnabled: false)) {
+        TitleAndMessageView(
+            title: "Canvas paused",
+        )
+    } leftAccessory: {
+        ImageAccessory(.systemName("checkmark.circle.fill"))
+    } rightAccessory: {
+        ImageButton(
+            .systemName("xmark"),
+            withOptions: .init(forgroundColor: .red)
+        ) {
+            print("xmark tapped")
+        }
+    }
+    
 }

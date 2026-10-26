@@ -12,18 +12,24 @@ public struct ToastMessageViewOptions {
 
     public var cornerRadius: CGFloat
     public var backgroundColor: Color
-    public var accessoryViewSpacing: CGFloat
+    public var internalSpacing: CGFloat
+    public var externalSpacing: CGFloat
     public var liquidGlassEnabled: Bool
+    public var stretched: Bool
 
     public init(
         cornerRadius: CGFloat = 32,
-        backgroundColor: Color = .gray,
-        accessoryViewSpacing: CGFloat = 12,
-        liquidGlassEnabled: Bool = false
+        backgroundColor: Color = .clear,// Color(UIColor.systemBackground),
+        internalSpacing: CGFloat = 5,
+        externalSpacing: CGFloat = 10,
+        liquidGlassEnabled: Bool = false,
+        stretched: Bool = false
     ) {
         self.cornerRadius = cornerRadius
         self.backgroundColor = backgroundColor
-        self.accessoryViewSpacing = accessoryViewSpacing
+        self.internalSpacing = internalSpacing
+        self.externalSpacing = externalSpacing
         self.liquidGlassEnabled = liquidGlassEnabled
+        self.stretched = stretched
     }
 }

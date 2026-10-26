@@ -67,12 +67,20 @@ public struct ToastType {
                             message: message
                         )
                     },
-                    leftAccessory: { EmptyView() },
-                    rightAccessory: { EmptyView() }
+                    leftAccessory: {
+                        ImageAccessory(.systemName("checkmark.circle.fill"))
+                    },
+                    rightAccessory: {
+                        ImageButton(
+                            .systemName("xmark"),
+                            withOptions: .init(forgroundColor: .red)
+                        ) {
+                            // TODO: call dismiss toast
+                            // dismissToast()
+                        }
+                    }
                 )
             )
         }
     }
 }
-
-

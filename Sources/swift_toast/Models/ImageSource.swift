@@ -5,6 +5,7 @@
 //  Created by Petr Makarov on 26/10/2026.
 //
 
+import SwiftUI
 
 public enum ImageSource {
         case systemName(String)
