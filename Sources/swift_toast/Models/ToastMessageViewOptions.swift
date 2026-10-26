@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+fileprivate let isLiquidGlassAvailable = SystemHelper.isLiquidGlassAvailable()
+
 public struct ToastMessageViewOptions {
     public static var `default`: ToastMessageViewOptions { ToastMessageViewOptions() }
 
@@ -16,17 +18,28 @@ public struct ToastMessageViewOptions {
     public var externalSpacing: CGFloat
     public var liquidGlassEnabled: Bool
     public var stretched: Bool
+    
+    private static func evaluateDefaultBackgroundColor(isLiquidGlassEnabled: Bool) -> Color {
+        if isLiquidGlassAvailable && isLiquidGlassEnabled {
+            return .clear
+        }
+        return Color.adaptive(light: "#0C0F1A", lightOpacity: 0.66, dark: "#FFFFFF", darkOpacity: 0.48)
+    }
 
     public init(
         cornerRadius: CGFloat = 32,
-        backgroundColor: Color = .clear,// Color(UIColor.systemBackground),
+        backgroundColor: Color? = nil,
         internalSpacing: CGFloat = 5,
         externalSpacing: CGFloat = 10,
         liquidGlassEnabled: Bool = false,
         stretched: Bool = false
     ) {
+        if let backgroundColor {
+            self.backgroundColor = backgroundColor
+        } else {
+            self.backgroundColor = Self.evaluateDefaultBackgroundColor(isLiquidGlassEnabled: liquidGlassEnabled)
+        }
         self.cornerRadius = cornerRadius
-        self.backgroundColor = backgroundColor
         self.internalSpacing = internalSpacing
         self.externalSpacing = externalSpacing
         self.liquidGlassEnabled = liquidGlassEnabled

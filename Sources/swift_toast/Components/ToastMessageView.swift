@@ -54,7 +54,6 @@ package struct ToastMessageView<
             .background {
                 RoundedRectangle(cornerRadius: options.cornerRadius)
                     .fill(options.backgroundColor)
-                    .shadow(radius: 3)
             }
             
     }

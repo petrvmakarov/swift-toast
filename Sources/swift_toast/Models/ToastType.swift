@@ -7,10 +7,21 @@
 
 import SwiftUI
 
+struct ToastOptions {
+    var iconSystemName: String? = nil
+    var iconColor: Color? = nil
+    var buttonIconSystemName: String? = nil
+    var buttonTint: Color? = nil
+    var buttonBackground: Color? = nil
+    
+}
+
 public struct ToastType {
     private let render: @MainActor () -> AnyView
 
-    private init(render: @escaping @MainActor () -> AnyView) {
+    private init(
+        render: @escaping @MainActor () -> AnyView
+    ) {
         self.render = render
     }
 
@@ -61,23 +72,22 @@ public struct ToastType {
         ToastType {
             AnyView(
                 ToastMessageView(
+                    ToastMessageViewOptions.default,
                     message: {
                         TitleAndMessageView(
                             title: title,
-                            message: message
+                            message: message,
+                            messageTitleSpacing: 0
                         )
                     },
                     leftAccessory: {
                         ImageAccessory(.systemName("checkmark.circle.fill"))
                     },
                     rightAccessory: {
-                        ImageButton(
+                        DismissImageButton(
                             .systemName("xmark"),
                             withOptions: .init(forgroundColor: .red)
-                        ) {
-                            // TODO: call dismiss toast
-                            // dismissToast()
-                        }
+                        )
                     }
                 )
             )

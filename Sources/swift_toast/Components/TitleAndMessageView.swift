@@ -32,10 +32,13 @@ package struct TitleAndMessageView: View {
         VStack(alignment: .leading, spacing: messageTitleSpacing) {
             if let title {
                 Text(title)
+                    .bold()
+                    .font(.footnote)
                     .lineLimit(titleLinesLimit)
             }
             if let message {
                 Text(message)
+                    .font(.footnote)
                     .lineLimit(messageLinesLimit)
             }
         }

@@ -44,12 +44,12 @@ public struct ToastModifier: ViewModifier {
     
     public func body(content: Content) -> some View {
         content
-            .environment(\.dismissToast, onDismiss)
-            .environment(\.showToast, ShowToastAction(action: onShow))
             .overlay(alignment: placement == .top ? .top: .bottom) {
                 if let type {
                     type.renderView()
                 }
             }
+            .environment(\.dismissToast, onDismiss)
+            .environment(\.showToast, ShowToastAction(action: onShow))
     }
 }
