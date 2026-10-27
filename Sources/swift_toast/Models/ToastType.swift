@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-// TODO: Move to constants
-fileprivate let defaultIsLiquidGlassEnabled: Bool = true
-
 struct ToastOptions {
     var iconSystemName: String
     var iconColor: Color
@@ -30,9 +27,9 @@ struct ToastOptions {
     
     private static func evaluateDefaultBackgroundColor(isLiquidGlassEnabled: Bool) -> Color {
         if SystemHelper.isLiquidGlassAvailable() && isLiquidGlassEnabled {
-            return .clear
+            return K.Defaults.backgroundLiquidGlass
         }
-        return Color.adaptive(light: "#0C0F1A", lightOpacity: 0.66, dark: "#FFFFFF", darkOpacity: 0.48)
+        return K.Defaults.backgroundRegular
     }
     
     private static func evaluateDefaultTitleColor(isLiquidGlassEnabled: Bool) -> Color {
@@ -56,12 +53,16 @@ struct ToastOptions {
         buttonTint: .accentColor,
         buttonBackground: nil,
         titleFont: .footnote.bold(),
-        titleColor: evaluateDefaultTitleColor(isLiquidGlassEnabled: defaultIsLiquidGlassEnabled),
+        titleColor: evaluateDefaultTitleColor(isLiquidGlassEnabled: K.Defaults.liquidGlassEnabled),
         messageFont: .footnote,
-        messageColor: evaluateDefaultMessageColor(isLiquidGlassEnabled: defaultIsLiquidGlassEnabled),
-        background: evaluateDefaultBackgroundColor(isLiquidGlassEnabled: defaultIsLiquidGlassEnabled),
-        isLiquidGlassEnabled: defaultIsLiquidGlassEnabled,
+        messageColor: evaluateDefaultMessageColor(isLiquidGlassEnabled: K.Defaults.liquidGlassEnabled),
+        background: evaluateDefaultBackgroundColor(isLiquidGlassEnabled: K.Defaults.liquidGlassEnabled),
+        isLiquidGlassEnabled: K.Defaults.liquidGlassEnabled,
     ) }
+    
+    public func merge(_ options: ToastOptions) {
+        
+    }
     
     init(
         iconSystemName: String? = nil,
@@ -186,7 +187,6 @@ public struct ToastType {
 
     @MainActor
     private static func predefined(title: StringProtocol? = nil, message: StringProtocol? = nil, options: ToastOptions) -> ToastType {
-        print("options=\(options)")
         return ToastType {
             AnyView(
                 ToastMessageView(
