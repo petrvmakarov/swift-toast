@@ -57,7 +57,13 @@ public struct UserToastOptions {
     }
     
     func applying(to defaults: ToastOptions) -> ToastOptions {
-        ToastOptions(
+        var evaluatedBackgroundColor = defaults.background
+        if let background {
+            evaluatedBackgroundColor = ColorWithLiquidGlass(
+                regular: background, liquidGlass: background
+            )
+        }
+        return ToastOptions(
             iconSystemName: iconSystemName ?? defaults.iconSystemName,
             iconColor: iconColor ?? defaults.iconColor,
             buttonSystemName: buttonSystemName ?? defaults.buttonSystemName,
@@ -67,7 +73,7 @@ public struct UserToastOptions {
             titleColor: titleColor ?? defaults.titleColor,
             messageFont: messageFont ?? defaults.messageFont,
             messageColor: messageColor ?? defaults.messageColor,
-            background: background ?? defaults.background,
+            background: evaluatedBackgroundColor,
             isLiquidGlassEnabled: isLiquidGlassEnabled ?? defaults.isLiquidGlassEnabled
         )
     }

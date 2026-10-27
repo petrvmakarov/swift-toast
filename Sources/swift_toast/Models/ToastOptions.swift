@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+struct ColorWithLiquidGlass {
+    var regular: Color
+    var liquidGlass: Color
+    
+    enum colorType {
+        case regular
+        case liquidGlass
+    }
+    
+    func getColor(for liquidGlassEnabled: Bool) -> Color {
+        liquidGlassEnabled && SystemHelper.isLiquidGlassAvailable() ? liquidGlass : regular
+    }
+}
+
 struct ToastOptions {
     var iconSystemName: String
     var iconColor: Color
@@ -21,16 +35,16 @@ struct ToastOptions {
     var messageFont: Font
     var messageColor: Color
     
-    var background: Color
+    var background: ColorWithLiquidGlass
     
     var isLiquidGlassEnabled: Bool
     
-    private static func evaluateDefaultBackgroundColor(isLiquidGlassEnabled: Bool) -> Color {
-        if SystemHelper.isLiquidGlassAvailable() && isLiquidGlassEnabled {
-            return K.Defaults.backgroundLiquidGlass
-        }
-        return K.Defaults.backgroundRegular
-    }
+//    private static func evaluateDefaultBackgroundColor(isLiquidGlassEnabled: Bool) -> ColorWithLiquidGlass {
+//        ColorWithLiquidGlass(
+//            regular: K.Defaults.backgroundRegular,
+//            liquidGlass: K.Defaults.backgroundLiquidGlass
+//        )
+//    }
     
     private static func evaluateDefaultTitleColor(isLiquidGlassEnabled: Bool) -> Color {
         if SystemHelper.isLiquidGlassAvailable() && isLiquidGlassEnabled {
@@ -56,8 +70,10 @@ struct ToastOptions {
         titleColor: evaluateDefaultTitleColor(isLiquidGlassEnabled: K.Defaults.liquidGlassEnabled),
         messageFont: .footnote,
         messageColor: evaluateDefaultMessageColor(isLiquidGlassEnabled: K.Defaults.liquidGlassEnabled),
-        // FIXME: background value depends on initial K.Defaults.liquidGlassEnabled value
-        background: evaluateDefaultBackgroundColor(isLiquidGlassEnabled: K.Defaults.liquidGlassEnabled),
+        background: ColorWithLiquidGlass(
+            regular: K.Defaults.backgroundRegular,
+            liquidGlass: K.Defaults.backgroundLiquidGlass
+        ),
         isLiquidGlassEnabled: K.Defaults.liquidGlassEnabled,
     ) }
     
@@ -78,7 +94,7 @@ struct ToastOptions {
         titleColor: Color? = nil,
         messageFont: Font? = nil,
         messageColor: Color? = nil,
-        background: Color? = nil,
+        background: ColorWithLiquidGlass? = nil,
         isLiquidGlassEnabled: Bool? = nil
     ) {
         self.iconSystemName = iconSystemName ?? Self.default.iconSystemName

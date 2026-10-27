@@ -133,7 +133,10 @@ public struct ToastType {
         return ToastType {
             AnyView(
                 ToastMessageView(
-                    ToastMessageViewOptions(backgroundColor: options.background, liquidGlassEnabled: options.isLiquidGlassEnabled),
+                    ToastMessageViewOptions(
+                        backgroundColor: options.background.getColor(for: options.isLiquidGlassEnabled),
+                        liquidGlassEnabled: options.isLiquidGlassEnabled
+                    ),
                     message: {
                         TitleAndMessageView(
                             title: title,
