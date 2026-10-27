@@ -30,21 +30,14 @@ struct ToastOptions {
     var buttonBackground: Color? = nil
     
     var titleFont: Font
-    var titleColor: Color
+    var titleColor: ColorWithLiquidGlass
     
     var messageFont: Font
-    var messageColor: Color
+    var messageColor: ColorWithLiquidGlass
     
     var background: ColorWithLiquidGlass
     
     var isLiquidGlassEnabled: Bool
-    
-//    private static func evaluateDefaultBackgroundColor(isLiquidGlassEnabled: Bool) -> ColorWithLiquidGlass {
-//        ColorWithLiquidGlass(
-//            regular: K.Defaults.backgroundRegular,
-//            liquidGlass: K.Defaults.backgroundLiquidGlass
-//        )
-//    }
     
     private static func evaluateDefaultTitleColor(isLiquidGlassEnabled: Bool) -> Color {
         if SystemHelper.isLiquidGlassAvailable() && isLiquidGlassEnabled {
@@ -67,9 +60,15 @@ struct ToastOptions {
         buttonTint: .accentColor,
         buttonBackground: nil,
         titleFont: .footnote.bold(),
-        titleColor: evaluateDefaultTitleColor(isLiquidGlassEnabled: K.Defaults.liquidGlassEnabled),
+        titleColor: ColorWithLiquidGlass(
+            regular: .white,
+            liquidGlass: .primary
+        ),
         messageFont: .footnote,
-        messageColor: evaluateDefaultMessageColor(isLiquidGlassEnabled: K.Defaults.liquidGlassEnabled),
+        messageColor: ColorWithLiquidGlass(
+            regular: .white,
+            liquidGlass: .primary
+        ),
         background: ColorWithLiquidGlass(
             regular: K.Defaults.backgroundRegular,
             liquidGlass: K.Defaults.backgroundLiquidGlass
@@ -91,9 +90,9 @@ struct ToastOptions {
         buttonTint: Color? = nil,
         buttonBackground: Color? = nil,
         titleFont: Font? = nil,
-        titleColor: Color? = nil,
+        titleColor: ColorWithLiquidGlass? = nil,
         messageFont: Font? = nil,
-        messageColor: Color? = nil,
+        messageColor: ColorWithLiquidGlass? = nil,
         background: ColorWithLiquidGlass? = nil,
         isLiquidGlassEnabled: Bool? = nil
     ) {

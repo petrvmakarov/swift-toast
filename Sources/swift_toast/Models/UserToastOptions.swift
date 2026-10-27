@@ -56,24 +56,27 @@ public struct UserToastOptions {
         self.onTap = onTap
     }
     
-    func applying(to defaults: ToastOptions) -> ToastOptions {
-        var evaluatedBackgroundColor = defaults.background
-        if let background {
-            evaluatedBackgroundColor = ColorWithLiquidGlass(
-                regular: background, liquidGlass: background
+    private static func evaluateColorWithLiquidGlass(_ value: Color?, fallback: ColorWithLiquidGlass) -> ColorWithLiquidGlass {
+        if let value {
+            return ColorWithLiquidGlass(
+                regular: value, liquidGlass: value
             )
         }
-        return ToastOptions(
+        return fallback
+    }
+    
+    func applying(to defaults: ToastOptions) -> ToastOptions {
+        ToastOptions(
             iconSystemName: iconSystemName ?? defaults.iconSystemName,
             iconColor: iconColor ?? defaults.iconColor,
             buttonSystemName: buttonSystemName ?? defaults.buttonSystemName,
             buttonTint: buttonTint ?? defaults.buttonTint,
             buttonBackground: buttonBackground ?? defaults.buttonBackground,
             titleFont: titleFont ?? defaults.titleFont,
-            titleColor: titleColor ?? defaults.titleColor,
+            titleColor: Self.evaluateColorWithLiquidGlass(titleColor, fallback: defaults.titleColor),
             messageFont: messageFont ?? defaults.messageFont,
-            messageColor: messageColor ?? defaults.messageColor,
-            background: evaluatedBackgroundColor,
+            messageColor: Self.evaluateColorWithLiquidGlass(messageColor, fallback: defaults.messageColor),
+            background: Self.evaluateColorWithLiquidGlass(background, fallback: defaults.background),
             isLiquidGlassEnabled: isLiquidGlassEnabled ?? defaults.isLiquidGlassEnabled
         )
     }
