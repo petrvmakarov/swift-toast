@@ -62,6 +62,7 @@ public struct ToastType {
     ) -> ToastType {
         predefined(title: title,
                    message: message,
+                   onTap: options?.onTap,
                    options: ToastOptions.info.merge(with: options))
     }
 
@@ -73,6 +74,7 @@ public struct ToastType {
     ) -> ToastType {
         predefined(title: title,
                    message: message,
+                   onTap: options?.onTap,
                    options: ToastOptions.success.merge(with: options))
     }
 
@@ -84,6 +86,7 @@ public struct ToastType {
     ) -> ToastType {
         predefined(title: title,
                    message: message,
+                   onTap: options?.onTap,
                    options: ToastOptions.warning.merge(with: options))
     }
 
@@ -95,6 +98,7 @@ public struct ToastType {
     ) -> ToastType {
         predefined(title: title,
                    message: message,
+                   onTap: options?.onTap,
                    options: ToastOptions.error.merge(with: options))
     }
 
@@ -121,8 +125,11 @@ public struct ToastType {
     }
 
     @MainActor
-    private static func predefined(title: StringProtocol? = nil, message: StringProtocol? = nil, options: ToastOptions) -> ToastType {
-        print("options.isLiquidGlassEnabled=\(options.isLiquidGlassEnabled)")
+    private static func predefined(
+        title: StringProtocol? = nil,
+        message: StringProtocol? = nil,
+        onTap: (() -> Void)? = nil,
+        options: ToastOptions) -> ToastType {
         return ToastType {
             AnyView(
                 ToastMessageView(
@@ -140,10 +147,19 @@ public struct ToastType {
                         ImageAccessory(.systemName(options.iconSystemName), withOptions: .init(forgroundColor: options.iconColor))
                     },
                     rightAccessory: {
-                        DismissImageButton(
-                            .systemName(options.buttonSystemName),
-                            withOptions: .init(forgroundColor: options.buttonTint, backgroundColor: options.buttonBackground)
-                        )
+                        if let onTap {
+                            ImageButton(
+                                .systemName(options.buttonSystemName),
+                                withOptions: .init(forgroundColor: options.buttonTint, backgroundColor: options.buttonBackground)
+                            ) {
+                                onTap()
+                            }
+                        } else {
+                            DismissImageButton(
+                                .systemName(options.buttonSystemName),
+                                withOptions: .init(forgroundColor: options.buttonTint, backgroundColor: options.buttonBackground)
+                            )
+                        }
                     }
                 )
             )

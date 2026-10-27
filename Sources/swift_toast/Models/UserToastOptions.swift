@@ -25,6 +25,8 @@ public struct UserToastOptions {
     var background: Color? = nil
     
     var isLiquidGlassEnabled: Bool? = nil
+    
+    var onTap: (() -> Void)? = nil
 
     public init(
         iconSystemName: String? = nil,
@@ -37,7 +39,8 @@ public struct UserToastOptions {
         messageFont: Font? = nil,
         messageColor: Color? = nil,
         background: Color? = nil,
-        isLiquidGlassEnabled: Bool? = nil
+        isLiquidGlassEnabled: Bool? = nil,
+        onTap: (() -> Void)? = nil
     ) {
         self.iconSystemName = iconSystemName
         self.iconColor = iconColor
@@ -50,6 +53,7 @@ public struct UserToastOptions {
         self.messageColor = messageColor
         self.background = background
         self.isLiquidGlassEnabled = isLiquidGlassEnabled
+        self.onTap = onTap
     }
     
     func applying(to defaults: ToastOptions) -> ToastOptions {

@@ -9,5 +9,5 @@ import SwiftUI
 
 extension EnvironmentValues {
     @Entry public var showToast = ShowToastAction(action: { _, _, _ in })
-    @Entry var dismissToast: () -> Void = { }
+    @Entry public var dismissToast: () -> Void = { }
 }

@@ -3,11 +3,14 @@ import swift_toast
 
 public struct ContentView: View {
     @Environment(\.showToast) private var showToast
+    @Environment(\.dismissToast) private var dismissToast
+    @State private var counter = 0
     
     public init() {}
 
     public var body: some View {
         Text("Hello toast!")
+        Text("Toast tapped \(counter) time(s)")
         Button {
             showToast(.info(title: "hello", message: "from toast", options: UserToastOptions(iconSystemName: "info.circle.fill", isLiquidGlassEnabled: true)))
             //showToast(.showString("custom text"), placement: .bottom, dismissAfter: 10)
@@ -22,7 +25,10 @@ public struct ContentView: View {
         Button {
             showToast(
                 .warning(title: "hello", message: "from toast",
-                         options: UserToastOptions(iconSystemName: "exclamationmark.circle.fill"))
+                         options: UserToastOptions(onTap: {
+                             dismissToast()
+                             counter += 1
+                         }))
             )
         } label: {
             Text("Warning")
