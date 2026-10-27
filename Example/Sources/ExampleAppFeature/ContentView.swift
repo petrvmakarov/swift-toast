@@ -9,7 +9,7 @@ public struct ContentView: View {
     public var body: some View {
         Text("Hello toast!")
         Button {
-            showToast(.info(title: "hello", message: "from toast"))
+            showToast(.info(title: "hello", message: "from toast", options: UserToastOptions(iconSystemName: "info.circle.fill", isLiquidGlassEnabled: true)))
             //showToast(.showString("custom text"), placement: .bottom, dismissAfter: 10)
         } label: {
             Text("Info")
@@ -20,12 +20,20 @@ public struct ContentView: View {
             Text("Success")
         }
         Button {
-            showToast(.warning(title: "hello", message: "from toast"))
+            showToast(
+                .warning(title: "hello", message: "from toast",
+                         options: UserToastOptions(iconSystemName: "exclamationmark.circle.fill"))
+            )
         } label: {
             Text("Warning")
         }
         Button {
-            showToast(.error(title: "hello", message: "from toast"))
+            //xmark.circle.fill
+            showToast(
+                .error(title: "hello", message: "from toast",
+                options: UserToastOptions(iconSystemName: "xmark.circle.fill")
+                      )
+            )
         } label: {
             Text("Error")
         }

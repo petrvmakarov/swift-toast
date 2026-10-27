@@ -7,91 +7,6 @@
 
 import SwiftUI
 
-struct ToastOptions {
-    var iconSystemName: String
-    var iconColor: Color
-    
-    var buttonSystemName: String
-    var buttonTint: Color
-    var buttonBackground: Color? = nil
-    
-    var titleFont: Font
-    var titleColor: Color
-    
-    var messageFont: Font
-    var messageColor: Color
-    
-    var background: Color
-    
-    var isLiquidGlassEnabled: Bool
-    
-    private static func evaluateDefaultBackgroundColor(isLiquidGlassEnabled: Bool) -> Color {
-        if SystemHelper.isLiquidGlassAvailable() && isLiquidGlassEnabled {
-            return K.Defaults.backgroundLiquidGlass
-        }
-        return K.Defaults.backgroundRegular
-    }
-    
-    private static func evaluateDefaultTitleColor(isLiquidGlassEnabled: Bool) -> Color {
-        if SystemHelper.isLiquidGlassAvailable() && isLiquidGlassEnabled {
-            return .primary
-        }
-        return .white
-    }
-    
-    private static func evaluateDefaultMessageColor(isLiquidGlassEnabled: Bool) -> Color {
-        if SystemHelper.isLiquidGlassAvailable() && isLiquidGlassEnabled {
-            return .primary
-        }
-        return .white
-    }
-    
-    public static var `default`: ToastOptions { ToastOptions(
-        iconSystemName: "",
-        iconColor: .accentColor,
-        buttonSystemName: "xmark",
-        buttonTint: .accentColor,
-        buttonBackground: nil,
-        titleFont: .footnote.bold(),
-        titleColor: evaluateDefaultTitleColor(isLiquidGlassEnabled: K.Defaults.liquidGlassEnabled),
-        messageFont: .footnote,
-        messageColor: evaluateDefaultMessageColor(isLiquidGlassEnabled: K.Defaults.liquidGlassEnabled),
-        background: evaluateDefaultBackgroundColor(isLiquidGlassEnabled: K.Defaults.liquidGlassEnabled),
-        isLiquidGlassEnabled: K.Defaults.liquidGlassEnabled,
-    ) }
-    
-    public func merge(_ options: ToastOptions) {
-        
-    }
-    
-    init(
-        iconSystemName: String? = nil,
-        iconColor: Color? = nil,
-        buttonSystemName: String? = nil,
-        buttonTint: Color? = nil,
-        buttonBackground: Color? = nil,
-        titleFont: Font? = nil,
-        titleColor: Color? = nil,
-        messageFont: Font? = nil,
-        messageColor: Color? = nil,
-        background: Color? = nil,
-        isLiquidGlassEnabled: Bool? = nil
-    ) {
-        self.iconSystemName = iconSystemName ?? Self.default.iconSystemName
-        self.iconColor = iconColor ?? Self.default.iconColor
-        self.buttonSystemName = buttonSystemName ?? ToastOptions.default.buttonSystemName
-        self.buttonTint = buttonTint ?? Self.default.buttonTint
-        self.buttonBackground = buttonBackground// ?? Self.default.buttonBackground
-        self.titleFont = titleFont ?? Self.default.titleFont
-        self.titleColor = titleColor ?? Self.default.titleColor
-        self.messageFont = messageFont ?? Self.default.messageFont
-        self.messageColor = messageColor ?? Self.default.messageColor
-        self.background = background ?? Self.default.background
-        self.isLiquidGlassEnabled = isLiquidGlassEnabled ?? Self.default.isLiquidGlassEnabled
-     
-    }
-}
-
 fileprivate extension ToastOptions {
     static var error: ToastOptions {
         ToastOptions(
@@ -144,23 +59,47 @@ public struct ToastType {
     }
 
     @MainActor
-    public static func info(title: StringProtocol? = nil, message: StringProtocol? = nil) -> ToastType {
-        predefined(title: title, message: message, options: ToastOptions.info)
+    public static func info(
+        title: StringProtocol? = nil,
+        message: StringProtocol? = nil,
+        options: UserToastOptions? = nil
+    ) -> ToastType {
+        predefined(title: title,
+                   message: message,
+                   options: ToastOptions.info.merge(with: options))
     }
 
     @MainActor
-    public static func success(title: StringProtocol? = nil, message: StringProtocol? = nil) -> ToastType {
-        predefined(title: title, message: message, options: ToastOptions.success)
+    public static func success(
+        title: StringProtocol? = nil,
+        message: StringProtocol? = nil,
+        options: UserToastOptions? = nil
+    ) -> ToastType {
+        predefined(title: title,
+                   message: message,
+                   options: ToastOptions.success.merge(with: options))
     }
 
     @MainActor
-    public static func warning(title: StringProtocol? = nil, message: StringProtocol? = nil) -> ToastType {
-        predefined(title: title, message: message, options: ToastOptions.warning)
+    public static func warning(
+        title: StringProtocol? = nil,
+        message: StringProtocol? = nil,
+        options: UserToastOptions? = nil
+    ) -> ToastType {
+        predefined(title: title,
+                   message: message,
+                   options: ToastOptions.warning.merge(with: options))
     }
 
     @MainActor
-    public static func error(title: StringProtocol? = nil, message: StringProtocol? = nil) -> ToastType {
-        predefined(title: title, message: message, options: ToastOptions.error)
+    public static func error(
+        title: StringProtocol? = nil,
+        message: StringProtocol? = nil,
+        options: UserToastOptions? = nil
+    ) -> ToastType {
+        predefined(title: title,
+                   message: message,
+                   options: ToastOptions.error.merge(with: options))
     }
 
     @MainActor
@@ -187,6 +126,7 @@ public struct ToastType {
 
     @MainActor
     private static func predefined(title: StringProtocol? = nil, message: StringProtocol? = nil, options: ToastOptions) -> ToastType {
+        print("options.isLiquidGlassEnabled=\(options.isLiquidGlassEnabled)")
         return ToastType {
             AnyView(
                 ToastMessageView(
