@@ -10,9 +10,8 @@ import SwiftUI
 fileprivate extension ToastOptions {
     static var error: ToastOptions {
         ToastOptions(
-            iconSystemName: "checkmark.circle.fill",
+            iconSystemName: "info.circle.fill",
             iconColor: .red,
-            
             buttonSystemName: "xmark",
             buttonTint: .red,
         )
@@ -20,9 +19,8 @@ fileprivate extension ToastOptions {
     
     static var warning: ToastOptions {
         ToastOptions(
-            iconSystemName: "checkmark.circle.fill",
+            iconSystemName: "exclamationmark.circle.fill",
             iconColor: .orange,
-            
             buttonSystemName: "xmark",
             buttonTint: .orange,
         )
@@ -32,7 +30,6 @@ fileprivate extension ToastOptions {
         ToastOptions(
             iconSystemName: "checkmark.circle.fill",
             iconColor: .green,
-            
             buttonSystemName: "xmark",
             buttonTint: .green,
         )
@@ -40,9 +37,8 @@ fileprivate extension ToastOptions {
     
     static var info: ToastOptions {
         ToastOptions(
-            iconSystemName: "checkmark.circle.fill",
+            iconSystemName: "xmark.circle.fill",
             iconColor: .accentColor,
-            
             buttonSystemName: "xmark",
             buttonTint: .accentColor,
         )
