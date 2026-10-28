@@ -1,5 +1,5 @@
 //
-//  UserToastOptions.swift
+//  ToastConfiguration.swift
 //  SwiftToast
 //
 //  Created by Petr Makarov on 27/10/2026.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public struct UserToastOptions {
+public struct ToastConfiguration {
     public struct ContainerOverrides {
         var cornerRadius: CGFloat?
         var internalSpacing: CGFloat?

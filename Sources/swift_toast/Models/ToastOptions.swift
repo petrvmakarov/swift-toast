@@ -76,7 +76,7 @@ package struct ToastOptions {
         liquidGlassEnabled: K.Defaults.liquidGlassEnabled,
     ) }
     
-    public func merge(with options: UserToastOptions?) -> ToastOptions {
+    public func merge(with options: ToastConfiguration?) -> ToastOptions {
         guard let options else {
             return self
         }

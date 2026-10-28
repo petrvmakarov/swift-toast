@@ -56,7 +56,7 @@ private struct ToastExamplesView: View {
                 .info(
                     title: "hello",
                     message: "from toast",
-                    options: UserToastOptions(liquidGlassEnabled: isLiquidGlassEnabled)
+                    options: ToastConfiguration(liquidGlassEnabled: isLiquidGlassEnabled)
                 ), placement: toastPlacement)
             //showToast(.showString("custom text"), placement: .bottom, dismissAfter: 10)
         } label: {
@@ -66,7 +66,7 @@ private struct ToastExamplesView: View {
             showToast(
                 .success(title: "hello",
                          message: "from toast",
-                         options: UserToastOptions(liquidGlassEnabled: isLiquidGlassEnabled)),
+                         options: ToastConfiguration(liquidGlassEnabled: isLiquidGlassEnabled)),
                 placement: toastPlacement
             )
         } label: {
@@ -75,7 +75,7 @@ private struct ToastExamplesView: View {
         Button {
             showToast(
                 .warning(title: "hello", message: "from toast",
-                         options: UserToastOptions(
+                         options: ToastConfiguration(
                             liquidGlassEnabled: isLiquidGlassEnabled,
                             onTap: {
                                 dismissToast()
@@ -92,7 +92,7 @@ private struct ToastExamplesView: View {
             showToast(
                 .error(title: "hello",
                        message: "from toast",
-                       options: UserToastOptions(liquidGlassEnabled: isLiquidGlassEnabled)
+                       options: ToastConfiguration(liquidGlassEnabled: isLiquidGlassEnabled)
                       ),
                 placement: toastPlacement
             )
@@ -105,7 +105,7 @@ private struct ToastExamplesView: View {
             showToast(
                 .error(title: "hello",
                        message: "from toast",
-                       options: UserToastOptions(
+                       options: ToastConfiguration(
                         iconColor: .white,
                         buttonTint: .white,
                         background: .red,

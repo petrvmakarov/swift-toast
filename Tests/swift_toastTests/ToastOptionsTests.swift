@@ -26,7 +26,7 @@ struct ToastOptionsTests {
             buttonSystemName: "base-button",
             liquidGlassEnabled: false
         )
-        let userOptions = UserToastOptions(
+        let userOptions = ToastConfiguration(
             iconSystemName: "custom-icon",
             buttonSystemName: "custom-button",
             liquidGlassEnabled: true
@@ -47,7 +47,7 @@ struct ToastOptionsTests {
             liquidGlassEnabled: true
         )
 
-        let merged = defaults.merge(with: UserToastOptions(iconSystemName: "custom-icon"))
+        let merged = defaults.merge(with: ToastConfiguration(iconSystemName: "custom-icon"))
 
         #expect(merged.iconSystemName == "custom-icon")
         #expect(merged.buttonSystemName == "base-button")
@@ -57,7 +57,7 @@ struct ToastOptionsTests {
     @Test("A user color is used for regular and liquid-glass appearances")
     func colorOverrideAppliesToBothAppearances() {
         let merged = ToastOptions.default.merge(
-            with: UserToastOptions(titleColor: .red)
+            with: ToastConfiguration(titleColor: .red)
         )
 
         #expect(merged.titleColor.regular == .red)
@@ -67,7 +67,7 @@ struct ToastOptionsTests {
     @Test("User tap handler is retained")
     func onTapHandler() {
         var tapCount = 0
-        let options = UserToastOptions {
+        let options = ToastConfiguration {
             tapCount += 1
         }
 

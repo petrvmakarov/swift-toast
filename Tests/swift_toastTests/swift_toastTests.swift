@@ -79,7 +79,7 @@ struct ToastSwipeToDismissBehaviorTests {
 struct ToastContainerOverridesTests {
     @Test("Container overrides preserve edge selections")
     func ignoreSafeAreaEdges() {
-        let options = UserToastOptions(
+        let options = ToastConfiguration(
             container: .init(ignoreSafeArea: [.top, .bottom])
         )
 
@@ -88,14 +88,14 @@ struct ToastContainerOverridesTests {
 
     @Test("Legacy stretched value is applied when no container value is supplied")
     func legacyStretchedFallback() {
-        let options = UserToastOptions(stretched: true)
+        let options = ToastConfiguration(stretched: true)
 
         #expect(options.container.stretched == true)
     }
 
     @Test("Container stretched value takes precedence")
     func containerStretchedPrecedence() {
-        let options = UserToastOptions(
+        let options = ToastConfiguration(
             stretched: true,
             container: .init(stretched: false)
         )

@@ -60,7 +60,7 @@ public struct ToastType {
     public static func info(
         title: StringProtocol? = nil,
         message: StringProtocol? = nil,
-        options: UserToastOptions? = nil
+        options: ToastConfiguration? = nil
     ) -> ToastType {
         predefined(title: title,
                    message: message,
@@ -73,7 +73,7 @@ public struct ToastType {
     public static func success(
         title: StringProtocol? = nil,
         message: StringProtocol? = nil,
-        options: UserToastOptions? = nil
+        options: ToastConfiguration? = nil
     ) -> ToastType {
         predefined(title: title,
                    message: message,
@@ -86,7 +86,7 @@ public struct ToastType {
     public static func warning(
         title: StringProtocol? = nil,
         message: StringProtocol? = nil,
-        options: UserToastOptions? = nil
+        options: ToastConfiguration? = nil
     ) -> ToastType {
         predefined(title: title,
                    message: message,
@@ -99,7 +99,7 @@ public struct ToastType {
     public static func error(
         title: StringProtocol? = nil,
         message: StringProtocol? = nil,
-        options: UserToastOptions? = nil
+        options: ToastConfiguration? = nil
     ) -> ToastType {
         predefined(title: title,
                    message: message,
@@ -135,7 +135,7 @@ public struct ToastType {
         title: StringProtocol? = nil,
         message: StringProtocol? = nil,
         onTap: (() -> Void)? = nil,
-        container: UserToastOptions.ContainerOverrides? = nil,
+        container: ToastConfiguration.ContainerOverrides? = nil,
         options: ToastOptions) -> ToastType {
         return ToastType {
             AnyView(
