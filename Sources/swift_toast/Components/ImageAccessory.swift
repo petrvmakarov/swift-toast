@@ -8,12 +8,12 @@
 import SwiftUI
 
 public struct ImageAccessoryOptions {
-    public var forgroundColor: Color
+    public var foregroundColor: Color
 
     public init(
-        forgroundColor: Color = .accentColor
+        foregroundColor: Color = .accentColor
     ) {
-        self.forgroundColor = forgroundColor
+        self.foregroundColor = foregroundColor
     }
 }
 
@@ -34,7 +34,7 @@ public struct ImageAccessory: View {
                 .resizable()
                     .scaledToFit()
                     .frame(width: 25, height: 25)
-                    .foregroundStyle(options.forgroundColor)
+                    .foregroundStyle(options.foregroundColor)
         }
         //.frame(maxHeight: 44)
         //.frame(width: 44)

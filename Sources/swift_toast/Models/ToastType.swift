@@ -161,20 +161,20 @@ public struct ToastType {
                         )
                     },
                     leftAccessory: {
-                        ImageAccessory(.systemName(options.iconSystemName), withOptions: .init(forgroundColor: options.iconColor))
+                        ImageAccessory(.systemName(options.iconSystemName), withOptions: .init(foregroundColor: options.iconColor))
                     },
                     rightAccessory: {
                         if let onTap {
                             ImageButton(
                                 .systemName(options.buttonSystemName),
-                                withOptions: .init(forgroundColor: options.buttonTint, backgroundColor: options.buttonBackground)
+                                withOptions: .init(foregroundColor: options.buttonTint, backgroundColor: options.buttonBackground)
                             ) {
                                 onTap()
                             }
                         } else {
                             DismissImageButton(
                                 .systemName(options.buttonSystemName),
-                                withOptions: .init(forgroundColor: options.buttonTint, backgroundColor: options.buttonBackground)
+                                withOptions: .init(foregroundColor: options.buttonTint, backgroundColor: options.buttonBackground)
                             )
                         }
                     }

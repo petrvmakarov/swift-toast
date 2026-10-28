@@ -8,23 +8,23 @@
 import SwiftUI
 
 public struct ImageButtonOptions {
-    public var forgroundColor: Color
+    public var foregroundColor: Color
     public var backgroundColor: Color?
     public var hideBackground: Bool
 
     public init(
-        forgroundColor: Color,
+        foregroundColor: Color,
         backgroundColor: Color? = nil,
         hideBackground: Bool = false
     ) {
-        self.forgroundColor = forgroundColor
+        self.foregroundColor = foregroundColor
         self.backgroundColor = backgroundColor
         self.hideBackground = hideBackground
     }
     
     var actualBackgroundColor: Color {
         guard let backgroundColor = backgroundColor else {
-            return forgroundColor.opacity(0.25)
+            return foregroundColor.opacity(0.25)
         }
         return backgroundColor
     }
@@ -52,7 +52,7 @@ public struct ImageButton: View {
                         .frame(width: 28, height: 28)
                 }
                 source.image
-                    .foregroundStyle(options.forgroundColor)
+                    .foregroundStyle(options.foregroundColor)
             }
         }
     }
@@ -61,15 +61,15 @@ public struct ImageButton: View {
 #Preview {
     VStack {
         Spacer()
-        ImageButton(.systemName("xmark"), withOptions: .init(forgroundColor: .red)) {
+        ImageButton(.systemName("xmark"), withOptions: .init(foregroundColor: .red)) {
             print("xmark tapped")
         }
         
-        ImageButton(.systemName("xmark"), withOptions: .init(forgroundColor: .blue, backgroundColor: nil)) {
+        ImageButton(.systemName("xmark"), withOptions: .init(foregroundColor: .blue, backgroundColor: nil)) {
             print("xmark tapped")
         }
         
-        ImageButton(.systemName("xmark"), withOptions: .init(forgroundColor: .yellow, backgroundColor: nil)) {
+        ImageButton(.systemName("xmark"), withOptions: .init(foregroundColor: .yellow, backgroundColor: nil)) {
             print("xmark tapped")
         }
         Spacer()

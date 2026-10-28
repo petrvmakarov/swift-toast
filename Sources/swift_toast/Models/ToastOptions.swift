@@ -11,11 +11,6 @@ struct ColorWithLiquidGlass {
     var regular: Color
     var liquidGlass: Color
     
-    enum colorType {
-        case regular
-        case liquidGlass
-    }
-    
     func getColor(for liquidGlassEnabled: Bool) -> Color {
         liquidGlassEnabled && K.isLiquidGlassAvailable ? liquidGlass : regular
     }
@@ -38,20 +33,6 @@ package struct ToastOptions {
     var background: ColorWithLiquidGlass
     
     var liquidGlassEnabled: Bool
-    
-    private static func evaluateDefaultTitleColor(isLiquidGlassEnabled: Bool) -> Color {
-        if K.isLiquidGlassAvailable && isLiquidGlassEnabled {
-            return .primary
-        }
-        return .white
-    }
-    
-    private static func evaluateDefaultMessageColor(isLiquidGlassEnabled: Bool) -> Color {
-        if K.isLiquidGlassAvailable && isLiquidGlassEnabled {
-            return .primary
-        }
-        return .white
-    }
     
     public static var `default`: ToastOptions { ToastOptions(
         iconSystemName: "",

@@ -28,7 +28,7 @@ struct ColorExtensionsTests {
 
     @Test("Image button derives a translucent background from its foreground")
     func derivedButtonBackground() throws {
-        let options = ImageButtonOptions(forgroundColor: .red)
+        let options = ImageButtonOptions(foregroundColor: .red)
         let actual = try components(of: UIColor(options.actualBackgroundColor))
         let expected = try components(of: UIColor(Color.red))
 
@@ -41,7 +41,7 @@ struct ColorExtensionsTests {
     @Test("Image button uses an explicit background")
     func explicitButtonBackground() throws {
         let options = ImageButtonOptions(
-            forgroundColor: .red,
+            foregroundColor: .red,
             backgroundColor: .blue
         )
         let actual = try components(of: UIColor(options.actualBackgroundColor))

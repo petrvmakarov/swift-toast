@@ -182,7 +182,7 @@ package struct ToastContainerView<
     } rightAccessory: {
         ImageButton(
             .systemName("xmark"),
-            withOptions: .init(forgroundColor: .red)
+            withOptions: .init(foregroundColor: .red)
         ) {
             print("xmark tapped")
         }
@@ -197,7 +197,7 @@ package struct ToastContainerView<
     } rightAccessory: {
         ImageButton(
             .systemName("xmark"),
-            withOptions: .init(forgroundColor: .red)
+            withOptions: .init(foregroundColor: .red)
         ) {
             print("xmark tapped")
         }
