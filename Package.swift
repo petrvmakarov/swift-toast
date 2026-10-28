@@ -8,7 +8,6 @@ let package = Package(
     platforms: [
         .iOS(.v18),
         .macCatalyst(.v18),
-        .watchOS(.v11),
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
