@@ -63,6 +63,7 @@ public struct ToastType {
         predefined(title: title,
                    message: message,
                    onTap: options?.onTap,
+                   container: options?.container,
                    options: ToastOptions.info.merge(with: options))
     }
 
@@ -75,6 +76,7 @@ public struct ToastType {
         predefined(title: title,
                    message: message,
                    onTap: options?.onTap,
+                   container: options?.container,
                    options: ToastOptions.success.merge(with: options))
     }
 
@@ -87,6 +89,7 @@ public struct ToastType {
         predefined(title: title,
                    message: message,
                    onTap: options?.onTap,
+                   container: options?.container,
                    options: ToastOptions.warning.merge(with: options))
     }
 
@@ -99,6 +102,7 @@ public struct ToastType {
         predefined(title: title,
                    message: message,
                    onTap: options?.onTap,
+                   container: options?.container,
                    options: ToastOptions.error.merge(with: options))
     }
 
@@ -129,13 +133,19 @@ public struct ToastType {
         title: StringProtocol? = nil,
         message: StringProtocol? = nil,
         onTap: (() -> Void)? = nil,
+        container: UserToastOptions.ContainerOverrides? = nil,
         options: ToastOptions) -> ToastType {
         return ToastType {
             AnyView(
                 ToastContainerView(
                     ToastContainerViewOptions(
+                        cornerRadius: container?.cornerRadius,
                         backgroundColor: options.background.getColor(for: options.liquidGlassEnabled),
-                        liquidGlassEnabled: options.liquidGlassEnabled
+                        internalSpacing: container?.internalSpacing,
+                        externalSpacing: container?.externalSpacing,
+                        liquidGlassEnabled: options.liquidGlassEnabled,
+                        stretched: container?.stretched,
+                        ignoreSafeArea: container?.ignoreSafeArea
                     ),
                     message: {
                         TitleAndMessageView(

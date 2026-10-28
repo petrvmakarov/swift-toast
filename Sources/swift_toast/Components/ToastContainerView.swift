@@ -54,6 +54,7 @@ package struct ToastContainerView<
             .background {
                 RoundedRectangle(cornerRadius: options.cornerRadius)
                     .fill(options.backgroundColor)
+                    .edgesIgnoringSafeArea(options.ignoreSafeArea)
             }
             
     }
@@ -64,7 +65,7 @@ package struct ToastContainerView<
             leftAccessory
             
             message
-            
+
             if options.stretched {
                 Spacer(minLength: 0)
             }
@@ -73,6 +74,7 @@ package struct ToastContainerView<
             
         }
         .padding(options.externalSpacing)
+
     }
 }
 

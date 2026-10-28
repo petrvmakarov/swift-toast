@@ -9,6 +9,29 @@
 import SwiftUI
 
 public struct UserToastOptions {
+    public struct ContainerOverrides {
+        var cornerRadius: CGFloat?
+        var internalSpacing: CGFloat?
+        var externalSpacing: CGFloat?
+        var stretched: Bool?
+        // FIXME: this prop doesnt make any effect if liquid glass is on
+        var ignoreSafeArea: Edge.Set?
+
+        public init(
+            cornerRadius: CGFloat? = nil,
+            internalSpacing: CGFloat? = nil,
+            externalSpacing: CGFloat? = nil,
+            stretched: Bool? = nil,
+            ignoreSafeArea: Edge.Set? = nil
+        ) {
+            self.cornerRadius = cornerRadius
+            self.internalSpacing = internalSpacing
+            self.externalSpacing = externalSpacing
+            self.stretched = stretched
+            self.ignoreSafeArea = ignoreSafeArea
+        }
+    }
+
     var iconSystemName: String? = nil
     var iconColor: Color? = nil
     
@@ -25,6 +48,7 @@ public struct UserToastOptions {
     var background: Color? = nil
     
     var liquidGlassEnabled: Bool? = nil
+    var container: ContainerOverrides = .init()
     
     var onTap: (() -> Void)? = nil
 
@@ -41,6 +65,7 @@ public struct UserToastOptions {
         background: Color? = nil,
         liquidGlassEnabled: Bool? = nil,
         stretched: Bool? = nil,
+        container: ContainerOverrides = .init(),
         onTap: (() -> Void)? = nil
     ) {
         self.iconSystemName = iconSystemName
@@ -54,6 +79,13 @@ public struct UserToastOptions {
         self.messageColor = messageColor
         self.background = background
         self.liquidGlassEnabled = liquidGlassEnabled
+        self.container = ContainerOverrides(
+            cornerRadius: container.cornerRadius,
+            internalSpacing: container.internalSpacing,
+            externalSpacing: container.externalSpacing,
+            stretched: container.stretched ?? stretched,
+            ignoreSafeArea: container.ignoreSafeArea
+        )
         self.onTap = onTap
     }
     

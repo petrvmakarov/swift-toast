@@ -73,10 +73,17 @@ public struct ContentView: View {
                 .error(title: "hello",
                        message: "from toast",
                        options: UserToastOptions(
+                        iconColor: .white,
+                        buttonTint: .white,
                         background: .red,
-                        liquidGlassEnabled: true,
-                        
-                        
+                        liquidGlassEnabled: isLiquidGlassEnabled,
+                        container: .init(
+                            cornerRadius: 0,
+                            internalSpacing: 15,
+                            externalSpacing: 15,
+                            stretched: true,
+                            ignoreSafeArea: .all
+                        )
                        )
                       )
             )
