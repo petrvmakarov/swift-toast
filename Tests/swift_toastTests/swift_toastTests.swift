@@ -1,5 +1,5 @@
 import Testing
-@testable import swift_toast
+@testable import SwiftToast
 
 @Suite("Toast modifier options")
 struct ToastModifierOptionsTests {

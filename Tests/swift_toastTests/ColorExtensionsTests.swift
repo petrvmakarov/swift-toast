@@ -2,7 +2,7 @@
 import SwiftUI
 import Testing
 import UIKit
-@testable import swift_toast
+@testable import SwiftToast
 
 @Suite("Color extensions")
 struct ColorExtensionsTests {

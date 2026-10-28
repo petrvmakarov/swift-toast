@@ -1,6 +1,6 @@
 import SwiftUI
 import Testing
-@testable import swift_toast
+@testable import SwiftToast
 
 @Suite("Show toast action")
 struct ShowToastActionTests {

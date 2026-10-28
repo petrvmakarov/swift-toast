@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import swift_toast
+import SwiftToast
 
 public struct ToastMessageViewExample: View {
     @Environment(\.showToast) private var showToast
