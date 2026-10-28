@@ -58,8 +58,8 @@ public struct ToastType {
 
     @MainActor
     public static func info(
-        title: StringProtocol? = nil,
-        message: StringProtocol? = nil,
+        title: (any StringProtocol)? = nil,
+        message: (any StringProtocol)? = nil,
         options: ToastConfiguration? = nil
     ) -> ToastType {
         predefined(title: title,
@@ -71,8 +71,8 @@ public struct ToastType {
 
     @MainActor
     public static func success(
-        title: StringProtocol? = nil,
-        message: StringProtocol? = nil,
+        title: (any StringProtocol)? = nil,
+        message: (any StringProtocol)? = nil,
         options: ToastConfiguration? = nil
     ) -> ToastType {
         predefined(title: title,
@@ -84,8 +84,8 @@ public struct ToastType {
 
     @MainActor
     public static func warning(
-        title: StringProtocol? = nil,
-        message: StringProtocol? = nil,
+        title: (any StringProtocol)? = nil,
+        message: (any StringProtocol)? = nil,
         options: ToastConfiguration? = nil
     ) -> ToastType {
         predefined(title: title,
@@ -97,8 +97,8 @@ public struct ToastType {
 
     @MainActor
     public static func error(
-        title: StringProtocol? = nil,
-        message: StringProtocol? = nil,
+        title: (any StringProtocol)? = nil,
+        message: (any StringProtocol)? = nil,
         options: ToastConfiguration? = nil
     ) -> ToastType {
         predefined(title: title,
@@ -132,8 +132,8 @@ public struct ToastType {
 
     @MainActor
     private static func predefined(
-        title: StringProtocol? = nil,
-        message: StringProtocol? = nil,
+        title: (any StringProtocol)? = nil,
+        message: (any StringProtocol)? = nil,
         onTap: (() -> Void)? = nil,
         container: ToastConfiguration.ContainerOverrides? = nil,
         options: ToastOptions) -> ToastType {
