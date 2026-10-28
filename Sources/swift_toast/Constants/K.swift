@@ -16,8 +16,8 @@ package enum K {
     }
 
     enum Defaults {
-        static let liquidGlassEnabled = false
-        static let backgroundRegular = Color.adaptive(light: "#0C0F1A", lightOpacity: 0.66, dark: "#FFFFFF", darkOpacity: 0.15)
+        static let liquidGlassEnabled = true
+        static let backgroundRegular = Color.adaptive(light: "#FEFEFE", dark: "#222222")
         static let backgroundLiquidGlass: Color = .clear
     }
 }

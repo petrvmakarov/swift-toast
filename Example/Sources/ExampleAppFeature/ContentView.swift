@@ -8,17 +8,11 @@ public struct ContentView: View {
 
     public var body: some View {
         VStack {
-            HStack {
-                Spacer(minLength: 0)
-            }
             Spacer()
             Toggle("Swipe to dismiss", isOn: $swipeToDismissEnabled)
                 .padding(.horizontal)
 
             ToastExamplesView()
-            HStack {
-                Spacer(minLength: 0)
-            }
             Spacer()
         }
         .withToast(
@@ -35,8 +29,6 @@ private struct ToastExamplesView: View {
     @State private var toastPlacement: ToastPlacement = .top
     
     var body: some View {
-        Text("Hello toast!")
-        Text("Warning toast tapped \(counter) time(s)")
         VStack {
             Toggle("Enable liquid glass", isOn: $isLiquidGlassEnabled)
             HStack {
@@ -49,6 +41,7 @@ private struct ToastExamplesView: View {
                 .pickerStyle(.menu)
                 .padding(.horizontal)
             }
+            Text("Warning toast tapped \(counter) time(s)")
         }.padding(.horizontal)
         
         Button {
