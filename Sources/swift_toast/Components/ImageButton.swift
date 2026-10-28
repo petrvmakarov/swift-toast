@@ -8,9 +8,19 @@
 import SwiftUI
 
 public struct ImageButtonOptions {
-    var forgroundColor: Color
-    var backgroundColor: Color? = nil
-    var hideBackground = false
+    public var forgroundColor: Color
+    public var backgroundColor: Color?
+    public var hideBackground: Bool
+
+    public init(
+        forgroundColor: Color,
+        backgroundColor: Color? = nil,
+        hideBackground: Bool = false
+    ) {
+        self.forgroundColor = forgroundColor
+        self.backgroundColor = backgroundColor
+        self.hideBackground = hideBackground
+    }
     
     var actualBackgroundColor: Color {
         guard let backgroundColor = backgroundColor else {

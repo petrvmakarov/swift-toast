@@ -8,7 +8,13 @@
 import SwiftUI
 
 public struct ImageAccessoryOptions {
-    var forgroundColor: Color = .accentColor
+    public var forgroundColor: Color
+
+    public init(
+        forgroundColor: Color = .accentColor
+    ) {
+        self.forgroundColor = forgroundColor
+    }
 }
 
 public struct ImageAccessory: View {
