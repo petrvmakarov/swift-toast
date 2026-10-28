@@ -47,11 +47,13 @@ fileprivate extension ToastOptions {
 
 public struct ToastType {
     private let render: @MainActor () -> AnyView
-
+    let id: UUID
+    
     private init(
         render: @escaping @MainActor () -> AnyView
     ) {
         self.render = render
+        self.id = UUID()
     }
 
     @MainActor
