@@ -37,7 +37,7 @@ package struct ToastOptions {
     
     var background: ColorWithLiquidGlass
     
-    var isLiquidGlassEnabled: Bool
+    var liquidGlassEnabled: Bool
     
     private static func evaluateDefaultTitleColor(isLiquidGlassEnabled: Bool) -> Color {
         if SystemHelper.isLiquidGlassAvailable() && isLiquidGlassEnabled {
@@ -73,7 +73,7 @@ package struct ToastOptions {
             regular: K.Defaults.backgroundRegular,
             liquidGlass: K.Defaults.backgroundLiquidGlass
         ),
-        isLiquidGlassEnabled: K.Defaults.liquidGlassEnabled,
+        liquidGlassEnabled: K.Defaults.liquidGlassEnabled,
     ) }
     
     public func merge(with options: UserToastOptions?) -> ToastOptions {
@@ -94,7 +94,7 @@ package struct ToastOptions {
         messageFont: Font? = nil,
         messageColor: ColorWithLiquidGlass? = nil,
         background: ColorWithLiquidGlass? = nil,
-        isLiquidGlassEnabled: Bool? = nil
+        liquidGlassEnabled: Bool? = nil
     ) {
         self.iconSystemName = iconSystemName ?? Self.default.iconSystemName
         self.iconColor = iconColor ?? Self.default.iconColor
@@ -106,7 +106,7 @@ package struct ToastOptions {
         self.messageFont = messageFont ?? Self.default.messageFont
         self.messageColor = messageColor ?? Self.default.messageColor
         self.background = background ?? Self.default.background
-        self.isLiquidGlassEnabled = isLiquidGlassEnabled ?? Self.default.isLiquidGlassEnabled
+        self.liquidGlassEnabled = liquidGlassEnabled ?? Self.default.liquidGlassEnabled
      
     }
 }

@@ -27,7 +27,7 @@ public struct ContentView: View {
                 .info(
                     title: "hello",
                     message: "from toast",
-                    options: UserToastOptions(isLiquidGlassEnabled: isLiquidGlassEnabled)
+                    options: UserToastOptions(liquidGlassEnabled: isLiquidGlassEnabled)
                 ))
             //showToast(.showString("custom text"), placement: .bottom, dismissAfter: 10)
         } label: {
@@ -36,7 +36,7 @@ public struct ContentView: View {
         Button {
             showToast(.success(title: "hello",
                                message: "from toast",
-                               options: UserToastOptions(isLiquidGlassEnabled: isLiquidGlassEnabled)
+                               options: UserToastOptions(liquidGlassEnabled: isLiquidGlassEnabled)
                               ))
         } label: {
             Text("Success")
@@ -45,7 +45,7 @@ public struct ContentView: View {
             showToast(
                 .warning(title: "hello", message: "from toast",
                          options: UserToastOptions(
-                            isLiquidGlassEnabled: isLiquidGlassEnabled,
+                            liquidGlassEnabled: isLiquidGlassEnabled,
                             onTap: {
                                 dismissToast()
                                 counter += 1
@@ -60,7 +60,7 @@ public struct ContentView: View {
             showToast(
                 .error(title: "hello",
                        message: "from toast",
-                       options: UserToastOptions(isLiquidGlassEnabled: isLiquidGlassEnabled)
+                       options: UserToastOptions(liquidGlassEnabled: isLiquidGlassEnabled)
                       )
             )
         } label: {
@@ -74,7 +74,7 @@ public struct ContentView: View {
                        message: "from toast",
                        options: UserToastOptions(
                         background: .red,
-                        isLiquidGlassEnabled: true,
+                        liquidGlassEnabled: true,
                         
                         
                        )

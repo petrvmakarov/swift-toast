@@ -39,7 +39,8 @@ public struct UserToastOptions {
         messageFont: Font? = nil,
         messageColor: Color? = nil,
         background: Color? = nil,
-        isLiquidGlassEnabled: Bool? = nil,
+        liquidGlassEnabled: Bool? = nil,
+        stretched: Bool? = nil,
         onTap: (() -> Void)? = nil
     ) {
         self.iconSystemName = iconSystemName
@@ -52,7 +53,7 @@ public struct UserToastOptions {
         self.messageFont = messageFont
         self.messageColor = messageColor
         self.background = background
-        self.liquidGlassEnabled = isLiquidGlassEnabled
+        self.liquidGlassEnabled = liquidGlassEnabled
         self.onTap = onTap
     }
     
@@ -77,7 +78,7 @@ public struct UserToastOptions {
             messageFont: messageFont ?? defaults.messageFont,
             messageColor: Self.evaluateColorWithLiquidGlass(messageColor, fallback: defaults.messageColor),
             background: Self.evaluateColorWithLiquidGlass(background, fallback: defaults.background),
-            isLiquidGlassEnabled: liquidGlassEnabled ?? defaults.isLiquidGlassEnabled
+            liquidGlassEnabled: liquidGlassEnabled ?? defaults.liquidGlassEnabled
         )
     }
 }

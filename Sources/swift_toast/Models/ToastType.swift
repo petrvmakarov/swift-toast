@@ -134,16 +134,16 @@ public struct ToastType {
             AnyView(
                 ToastContainerView(
                     ToastContainerViewOptions(
-                        backgroundColor: options.background.getColor(for: options.isLiquidGlassEnabled),
-                        liquidGlassEnabled: options.isLiquidGlassEnabled
+                        backgroundColor: options.background.getColor(for: options.liquidGlassEnabled),
+                        liquidGlassEnabled: options.liquidGlassEnabled
                     ),
                     message: {
                         TitleAndMessageView(
                             title: title,
                             message: message,
                             messageTitleSpacing: 0,
-                            titleColor: options.titleColor.getColor(for: options.isLiquidGlassEnabled),
-                            messageColor: options.messageColor.getColor(for: options.isLiquidGlassEnabled),
+                            titleColor: options.titleColor.getColor(for: options.liquidGlassEnabled),
+                            messageColor: options.messageColor.getColor(for: options.liquidGlassEnabled),
                         )
                     },
                     leftAccessory: {
