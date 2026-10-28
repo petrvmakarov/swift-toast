@@ -7,6 +7,45 @@
 
 import SwiftUI
 
+enum ToastSwipeToDismissBehavior {
+    static let dismissalThreshold: CGFloat = 80
+
+    static func offset(
+        for translation: CGFloat,
+        placement: ToastPlacement
+    ) -> CGFloat {
+        switch placement {
+        case .top:
+            min(translation, 0)
+        case .bottom:
+            max(translation, 0)
+        }
+    }
+
+    static func projectedDistance(
+        for translation: CGFloat,
+        placement: ToastPlacement
+    ) -> CGFloat {
+        switch placement {
+        case .top:
+            -translation
+        case .bottom:
+            translation
+        }
+    }
+
+    static func shouldDismiss(
+        predictedTranslation: CGFloat,
+        placement: ToastPlacement,
+        isEnabled: Bool
+    ) -> Bool {
+        isEnabled && projectedDistance(
+            for: predictedTranslation,
+            placement: placement
+        ) > dismissalThreshold
+    }
+}
+
 public struct ToastModifier: ViewModifier {
     private let options: ToastModifierOptions
 
@@ -63,24 +102,17 @@ public struct ToastModifier: ViewModifier {
     private var swipeToDismissGesture: some Gesture {
         DragGesture(minimumDistance: 10)
             .onChanged { value in
-                switch placement {
-                case .top:
-                    dragOffset = min(value.translation.height, 0)
-                case .bottom:
-                    dragOffset = max(value.translation.height, 0)
-                }
+                dragOffset = ToastSwipeToDismissBehavior.offset(
+                    for: value.translation.height,
+                    placement: placement
+                )
             }
             .onEnded { value in
-                let projectedDistance: CGFloat
-
-                switch placement {
-                case .top:
-                    projectedDistance = -value.predictedEndTranslation.height
-                case .bottom:
-                    projectedDistance = value.predictedEndTranslation.height
-                }
-
-                if options.swipeToDismissEnabled && projectedDistance > 80 {
+                if ToastSwipeToDismissBehavior.shouldDismiss(
+                    predictedTranslation: value.predictedEndTranslation.height,
+                    placement: placement,
+                    isEnabled: options.swipeToDismissEnabled
+                ) {
                     onDismiss()
                 } else {
                     withAnimation(.spring(duration: 0.25)) {
