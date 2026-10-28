@@ -15,14 +15,14 @@ public struct ToastMessageViewExample: View {
 
     public var body: some View {
         VStack {
-            ToastMessageView {
+            ToastContainerView {
                 TitleAndMessageView(
                     title: "This is a title",
                     message: "This is a message"
                 )
             }
             
-            ToastMessageView {
+            ToastContainerView {
                 TitleAndMessageView(
                     title: "This is a title",
                     message: "This is a message",
@@ -30,15 +30,15 @@ public struct ToastMessageViewExample: View {
                 )
             }
             
-            ToastMessageView(ToastMessageViewOptions(liquidGlassEnabled: true)) {
+            ToastContainerView(ToastContainerViewOptions(liquidGlassEnabled: true)) {
                 TitleAndMessageView(title: "This is a title")
             }
             
-            ToastMessageView {
+            ToastContainerView {
                 TitleAndMessageView(message: "This is a message")
             }
             
-            ToastMessageView {
+            ToastContainerView {
                 TitleAndMessageView(
                     title: "This is a title",
                     message: "This is a message a long long looooooooooooooooooooooooooooooong message long long long long long long long long long long long long long long long long message",

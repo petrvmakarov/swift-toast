@@ -54,6 +54,7 @@ public struct ContentView: View {
         } label: {
             Text("Warning")
         }
+        
         Button {
             //xmark.circle.fill
             showToast(
@@ -64,6 +65,23 @@ public struct ContentView: View {
             )
         } label: {
             Text("Error")
+        }
+        
+        Button {
+            //xmark.circle.fill
+            showToast(
+                .error(title: "hello",
+                       message: "from toast",
+                       options: UserToastOptions(
+                        background: .red,
+                        isLiquidGlassEnabled: true,
+                        
+                        
+                       )
+                      )
+            )
+        } label: {
+            Text("Error customized")
         }
     }
 }

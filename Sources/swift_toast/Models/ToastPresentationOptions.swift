@@ -32,13 +32,13 @@ func renderTitleAndMessageView(_ data: Any) -> some View {
 }
 
 public struct ToastPresentationOptions<TData: Hashable> {
-    let messageViewOptions: ToastMessageViewOptions
+    let messageViewOptions: ToastContainerViewOptions
     let renderMessage: @MainActor (_ data: TData) -> any View
     let renderLeftAccessory: @MainActor (_ data: TData) -> any View
     let renderRightAccessory: @MainActor (_ data: TData) -> any View
 
     public init(
-        messageViewOptions: ToastMessageViewOptions = ToastMessageViewOptions.default,
+        messageViewOptions: ToastContainerViewOptions = ToastContainerViewOptions.default,
         renderMessage: @escaping @MainActor (_ data: TData) -> any View,
         renderLeftAccessory: @escaping @MainActor (_ data: TData) -> any View = { _ in EmptyView() },
         renderRightAccessory: @escaping @MainActor (_ data: TData) -> any View = { _ in EmptyView() }

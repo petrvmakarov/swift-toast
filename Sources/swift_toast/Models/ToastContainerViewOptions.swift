@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-public struct ToastMessageViewOptions {
-    public static var `default`: ToastMessageViewOptions { ToastMessageViewOptions(
+public struct ToastContainerViewOptions {
+    public static var `default`: ToastContainerViewOptions { ToastContainerViewOptions(
         cornerRadius: 32,
         backgroundColor: .clear,
         internalSpacing: 5,

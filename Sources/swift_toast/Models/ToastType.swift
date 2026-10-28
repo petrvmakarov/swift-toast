@@ -10,7 +10,7 @@ import SwiftUI
 fileprivate extension ToastOptions {
     static var error: ToastOptions {
         ToastOptions(
-            iconSystemName: "info.circle.fill",
+            iconSystemName: "wrongwaysign",
             iconColor: .red,
             buttonSystemName: "xmark",
             buttonTint: .red,
@@ -19,7 +19,7 @@ fileprivate extension ToastOptions {
     
     static var warning: ToastOptions {
         ToastOptions(
-            iconSystemName: "exclamationmark.circle.fill",
+            iconSystemName: "exclamationmark.circle",
             iconColor: .orange,
             buttonSystemName: "xmark",
             buttonTint: .orange,
@@ -28,7 +28,7 @@ fileprivate extension ToastOptions {
     
     static var success: ToastOptions {
         ToastOptions(
-            iconSystemName: "checkmark.circle.fill",
+            iconSystemName: "checkmark.circle",
             iconColor: .green,
             buttonSystemName: "xmark",
             buttonTint: .green,
@@ -37,7 +37,7 @@ fileprivate extension ToastOptions {
     
     static var info: ToastOptions {
         ToastOptions(
-            iconSystemName: "xmark.circle.fill",
+            iconSystemName: "info.circle",
             iconColor: .accentColor,
             buttonSystemName: "xmark",
             buttonTint: .accentColor,
@@ -109,7 +109,7 @@ public struct ToastType {
     ) -> ToastType {
         ToastType {
             AnyView(
-                ToastMessageView(
+                ToastContainerView(
                     presentationOptions.messageViewOptions,
                     message: { AnyView(presentationOptions.renderMessage(data)) },
                     leftAccessory: { AnyView(presentationOptions.renderLeftAccessory(data)) },
@@ -132,8 +132,8 @@ public struct ToastType {
         options: ToastOptions) -> ToastType {
         return ToastType {
             AnyView(
-                ToastMessageView(
-                    ToastMessageViewOptions(
+                ToastContainerView(
+                    ToastContainerViewOptions(
                         backgroundColor: options.background.getColor(for: options.isLiquidGlassEnabled),
                         liquidGlassEnabled: options.isLiquidGlassEnabled
                     ),

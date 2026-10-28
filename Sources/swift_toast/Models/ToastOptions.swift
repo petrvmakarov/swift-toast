@@ -21,7 +21,7 @@ struct ColorWithLiquidGlass {
     }
 }
 
-struct ToastOptions {
+package struct ToastOptions {
     var iconSystemName: String
     var iconColor: Color
     

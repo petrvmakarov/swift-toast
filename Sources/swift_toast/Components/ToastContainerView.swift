@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-package struct ToastMessageView<
+package struct ToastContainerView<
     Message: View,
     LeftAccessory: View,
     RightAccessory: View
 >: View {
-    private let options: ToastMessageViewOptions
+    private let options: ToastContainerViewOptions
     private let message: Message
     private let leftAccessory: LeftAccessory
     private let rightAccessory: RightAccessory
     
     package init(
-        _ options: ToastMessageViewOptions = ToastMessageViewOptions.default,
+        _ options: ToastContainerViewOptions = ToastContainerViewOptions.default,
         @ViewBuilder message: () -> Message = { EmptyView() },
         @ViewBuilder leftAccessory: () -> LeftAccessory = { EmptyView() },
         @ViewBuilder rightAccessory: () -> RightAccessory = { EmptyView() },
@@ -77,14 +77,14 @@ package struct ToastMessageView<
 }
 
 #Preview {
-    ToastMessageView {
+    ToastContainerView {
         TitleAndMessageView(
             title: "This is a title",
             message: "This is a message"
         )
     }
     
-    ToastMessageView {
+    ToastContainerView {
         TitleAndMessageView(
             title: "This is a title",
             message: "This is a message",
@@ -92,15 +92,15 @@ package struct ToastMessageView<
         )
     }
     
-    ToastMessageView(ToastMessageViewOptions(liquidGlassEnabled: true)) {
+    ToastContainerView(ToastContainerViewOptions(liquidGlassEnabled: true)) {
         TitleAndMessageView(title: "This is a title")
     }
     
-    ToastMessageView {
+    ToastContainerView {
         TitleAndMessageView(message: "This is a message")
     }
     
-    ToastMessageView {
+    ToastContainerView {
         TitleAndMessageView(
             title: "This is a title",
             message: "This is a message a long long looooooooooooooooooooooooooooooong message long long long long long long long long long long long long long long long long message",
@@ -108,13 +108,13 @@ package struct ToastMessageView<
         )
     }
     
-    ToastMessageView {
+    ToastContainerView {
         TitleAndMessageView(
             title: "This is a title",
         )
     }
     
-    ToastMessageView(ToastMessageViewOptions(liquidGlassEnabled: true)) {
+    ToastContainerView(ToastContainerViewOptions(liquidGlassEnabled: true)) {
         TitleAndMessageView(
             title: "Download complete",
             message: "report.pdf was saved",
@@ -131,7 +131,7 @@ package struct ToastMessageView<
         }
     }
     
-    ToastMessageView(ToastMessageViewOptions(liquidGlassEnabled: true)) {
+    ToastContainerView(ToastContainerViewOptions(liquidGlassEnabled: true)) {
         TitleAndMessageView(
             title: "Canvas paused",
         )
@@ -171,7 +171,7 @@ package struct ToastMessageView<
 
 #Preview("Product ready") {
     
-    ToastMessageView(ToastMessageViewOptions(liquidGlassEnabled: true)) {
+    ToastContainerView(ToastContainerViewOptions(liquidGlassEnabled: true)) {
         TitleAndMessageView(
             title: "Canvas paused",
         )
@@ -186,7 +186,7 @@ package struct ToastMessageView<
         }
     }
     
-    ToastMessageView(ToastMessageViewOptions(liquidGlassEnabled: false)) {
+    ToastContainerView(ToastContainerViewOptions(liquidGlassEnabled: false)) {
         TitleAndMessageView(
             title: "Canvas paused",
         )
