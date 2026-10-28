@@ -44,8 +44,6 @@ public struct ImageButton: View {
                 source.image
                     .foregroundStyle(options.forgroundColor)
             }
-//            .frame(maxHeight: 44)
-//            .frame(width: 44)
         }
     }
 }

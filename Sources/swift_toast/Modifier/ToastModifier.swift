@@ -51,7 +51,6 @@ public struct ToastModifier: ViewModifier {
 
     @State private var type: ToastType?
     @State private var placement: ToastPlacement = .top
-    @State private var disappearAfter: TimeInterval = 2.0
     @State private var dismissTask: DispatchWorkItem?
     @State private var dragOffset: CGFloat = 0
     
@@ -85,8 +84,6 @@ public struct ToastModifier: ViewModifier {
             self.type = type
             self.placement = placement
         }
-        self.disappearAfter = dismissAfter
-        
         // cancel previous dismissal task if any
         dismissTask?.cancel()
         
@@ -96,7 +93,7 @@ public struct ToastModifier: ViewModifier {
         }
         
         self.dismissTask = task
-        DispatchQueue.main.asyncAfter(deadline: .now() + disappearAfter + 1, execute: task)
+        DispatchQueue.main.asyncAfter(deadline: .now() + dismissAfter, execute: task)
     }
 
     private var swipeToDismissGesture: some Gesture {
