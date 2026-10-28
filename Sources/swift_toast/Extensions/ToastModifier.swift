@@ -8,6 +8,8 @@
 import SwiftUI
 
 public struct ToastModifier: ViewModifier {
+    private let options: ToastModifierOptions
+
     @State private var type: ToastType?
     @State private var placement: ToastPlacement = .top
     @State private var disappearAfter: TimeInterval = 2.0
@@ -15,6 +17,12 @@ public struct ToastModifier: ViewModifier {
     @State private var dragOffset: CGFloat = 0
     
     @State private var toastId: UUID = UUID()
+
+    public init(
+        options: ToastModifierOptions = .init()
+    ) {
+        self.options = options
+    }
     
     func onDismiss() {
         dismissTask?.cancel()
@@ -72,7 +80,7 @@ public struct ToastModifier: ViewModifier {
                     projectedDistance = value.predictedEndTranslation.height
                 }
 
-                if projectedDistance > 80 {
+                if options.swipeToDismissEnabled && projectedDistance > 80 {
                     onDismiss()
                 } else {
                     withAnimation(.spring(duration: 0.25)) {

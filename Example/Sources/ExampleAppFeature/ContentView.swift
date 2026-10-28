@@ -2,13 +2,37 @@ import SwiftUI
 import swift_toast
 
 public struct ContentView: View {
+    @State private var swipeToDismissEnabled = true
+
+    public init() {}
+
+    public var body: some View {
+        VStack {
+            HStack {
+                Spacer(minLength: 0)
+            }
+            Spacer()
+            Toggle("Swipe to dismiss", isOn: $swipeToDismissEnabled)
+                .padding(.horizontal)
+
+            ToastExamplesView()
+            HStack {
+                Spacer(minLength: 0)
+            }
+            Spacer()
+        }
+        .withToast(
+            .init(swipeToDismissEnabled: swipeToDismissEnabled)
+        )
+    }
+}
+
+private struct ToastExamplesView: View {
     @Environment(\.showToast) private var showToast
     @Environment(\.dismissToast) private var dismissToast
     @State private var counter = 0
     @State private var isLiquidGlassEnabled = isLiquidGlassAvailable()
     @State private var toastPlacement: ToastPlacement = .top
-    
-    public init() {}
     
     static func isLiquidGlassAvailable() -> Bool {
         if #available(iOS 26.0, macOS 26.0, watchOS 26.0, tvOS 26.0, macCatalyst 26.0,  *) {
@@ -17,7 +41,7 @@ public struct ContentView: View {
         return false
     }
     
-    public var body: some View {
+    var body: some View {
         Text("Hello toast!")
         Text("Warning toast tapped \(counter) time(s)")
         VStack {
@@ -110,17 +134,8 @@ public struct ContentView: View {
 }
 
 #Preview {
-    VStack {
-        Spacer()
-        HStack {
-            Spacer(minLength: 0)
-        }
+
         ContentView()
-        HStack {
-            Spacer(minLength: 0)
-        }
-        Spacer()
-    }
+        
     
-    .withToast()
 }
