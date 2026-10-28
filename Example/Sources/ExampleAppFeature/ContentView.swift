@@ -1,5 +1,5 @@
 import SwiftUI
-import swift_toast
+import SwiftToast
 
 public struct ContentView: View {
     @State private var swipeToDismissEnabled = true

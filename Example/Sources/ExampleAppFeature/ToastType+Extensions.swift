@@ -5,7 +5,7 @@
 //  Created by Petr Makarov on 25/10/2026.
 //
 import SwiftUI
-import swift_toast
+import SwiftToast
 
 extension ToastType {
     @MainActor
