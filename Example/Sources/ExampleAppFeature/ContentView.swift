@@ -6,6 +6,7 @@ public struct ContentView: View {
     @Environment(\.dismissToast) private var dismissToast
     @State private var counter = 0
     @State private var isLiquidGlassEnabled = isLiquidGlassAvailable()
+    @State private var toastPlacement: ToastPlacement = .top
     
     public init() {}
     
@@ -19,8 +20,19 @@ public struct ContentView: View {
     public var body: some View {
         Text("Hello toast!")
         Text("Warning toast tapped \(counter) time(s)")
-        Toggle("Enable liquid glass", isOn: $isLiquidGlassEnabled)
-            .padding(.horizontal)
+        VStack {
+            Toggle("Enable liquid glass", isOn: $isLiquidGlassEnabled)
+            HStack {
+                Text("Placement")
+                Spacer()
+                Picker("Toast placement", selection: $toastPlacement) {
+                    Text("Top").tag(ToastPlacement.top)
+                    Text("Bottom").tag(ToastPlacement.bottom)
+                }
+                .pickerStyle(.menu)
+                .padding(.horizontal)
+            }
+        }.padding(.horizontal)
         
         Button {
             showToast(
@@ -28,16 +40,18 @@ public struct ContentView: View {
                     title: "hello",
                     message: "from toast",
                     options: UserToastOptions(liquidGlassEnabled: isLiquidGlassEnabled)
-                ))
+                ), placement: toastPlacement)
             //showToast(.showString("custom text"), placement: .bottom, dismissAfter: 10)
         } label: {
             Text("Info")
         }
         Button {
-            showToast(.success(title: "hello",
-                               message: "from toast",
-                               options: UserToastOptions(liquidGlassEnabled: isLiquidGlassEnabled)
-                              ))
+            showToast(
+                .success(title: "hello",
+                         message: "from toast",
+                         options: UserToastOptions(liquidGlassEnabled: isLiquidGlassEnabled)),
+                placement: toastPlacement
+            )
         } label: {
             Text("Success")
         }
@@ -49,7 +63,8 @@ public struct ContentView: View {
                             onTap: {
                                 dismissToast()
                                 counter += 1
-                            }))
+                            })),
+                placement: toastPlacement
             )
         } label: {
             Text("Warning")
@@ -61,7 +76,8 @@ public struct ContentView: View {
                 .error(title: "hello",
                        message: "from toast",
                        options: UserToastOptions(liquidGlassEnabled: isLiquidGlassEnabled)
-                      )
+                      ),
+                placement: toastPlacement
             )
         } label: {
             Text("Error")
@@ -76,16 +92,16 @@ public struct ContentView: View {
                         iconColor: .white,
                         buttonTint: .white,
                         background: .red,
-                        liquidGlassEnabled: isLiquidGlassEnabled,
+                        liquidGlassEnabled: false,
                         container: .init(
-                            cornerRadius: 0,
+                            cornerRadius: 5,
                             internalSpacing: 15,
                             externalSpacing: 15,
                             stretched: true,
                             ignoreSafeArea: .all
                         )
                        )
-                      )
+                      ), placement: toastPlacement
             )
         } label: {
             Text("Error customized")
