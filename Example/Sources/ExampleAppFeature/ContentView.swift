@@ -108,6 +108,7 @@ private struct ToastExamplesView: View {
                        options: ToastConfiguration(
                         iconColor: .white,
                         buttonTint: .white,
+                        titleFont: .headline,
                         background: .red,
                         liquidGlassEnabled: false,
                         container: .init(

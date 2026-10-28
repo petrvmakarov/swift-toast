@@ -15,6 +15,8 @@ package struct TitleAndMessageView: View {
     var messageTitleSpacing: CGFloat? = nil
     var titleColor: Color = .primary
     var messageColor: Color = .primary
+    var titleFont: Font = .footnote.bold()
+    var messageFont: Font = .footnote.bold()
 
     package init(
         title: (any StringProtocol)? = nil,
@@ -23,7 +25,9 @@ package struct TitleAndMessageView: View {
         messageLinesLimit: Int? = nil,
         messageTitleSpacing: CGFloat? = nil,
         titleColor: Color = .primary,
-        messageColor: Color = .primary
+        messageColor: Color = .primary,
+        titleFont: Font = .footnote.bold(),
+        messageFont: Font = .footnote.bold(),
     ) {
         self.title = title
         self.message = message
@@ -32,6 +36,8 @@ package struct TitleAndMessageView: View {
         self.messageTitleSpacing = messageTitleSpacing
         self.titleColor = titleColor
         self.messageColor = messageColor
+        self.titleFont = titleFont
+        self.messageFont = messageFont
     }
     
     package var body: some View {
@@ -39,14 +45,13 @@ package struct TitleAndMessageView: View {
             if let title {
                 Text(title)
                     .foregroundStyle(titleColor)
-                    .bold()
-                    .font(.footnote)
+                    .font(titleFont)
                     .lineLimit(titleLinesLimit)
             }
             if let message {
                 Text(message)
                     .foregroundStyle(messageColor)
-                    .font(.footnote)
+                    .font(messageFont)
                     .lineLimit(messageLinesLimit)
             }
         }
