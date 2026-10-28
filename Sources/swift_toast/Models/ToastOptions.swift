@@ -17,7 +17,7 @@ struct ColorWithLiquidGlass {
     }
     
     func getColor(for liquidGlassEnabled: Bool) -> Color {
-        liquidGlassEnabled && SystemHelper.isLiquidGlassAvailable() ? liquidGlass : regular
+        liquidGlassEnabled && K.isLiquidGlassAvailable ? liquidGlass : regular
     }
 }
 
@@ -40,14 +40,14 @@ package struct ToastOptions {
     var liquidGlassEnabled: Bool
     
     private static func evaluateDefaultTitleColor(isLiquidGlassEnabled: Bool) -> Color {
-        if SystemHelper.isLiquidGlassAvailable() && isLiquidGlassEnabled {
+        if K.isLiquidGlassAvailable && isLiquidGlassEnabled {
             return .primary
         }
         return .white
     }
     
     private static func evaluateDefaultMessageColor(isLiquidGlassEnabled: Bool) -> Color {
-        if SystemHelper.isLiquidGlassAvailable() && isLiquidGlassEnabled {
+        if K.isLiquidGlassAvailable && isLiquidGlassEnabled {
             return .primary
         }
         return .white

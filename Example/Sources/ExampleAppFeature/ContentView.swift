@@ -31,15 +31,8 @@ private struct ToastExamplesView: View {
     @Environment(\.showToast) private var showToast
     @Environment(\.dismissToast) private var dismissToast
     @State private var counter = 0
-    @State private var isLiquidGlassEnabled = isLiquidGlassAvailable()
+    @State private var isLiquidGlassEnabled = K.isLiquidGlassAvailable
     @State private var toastPlacement: ToastPlacement = .top
-    
-    static func isLiquidGlassAvailable() -> Bool {
-        if #available(iOS 26.0, macOS 26.0, watchOS 26.0, tvOS 26.0, macCatalyst 26.0,  *) {
-            return true
-        }
-        return false
-    }
     
     var body: some View {
         Text("Hello toast!")

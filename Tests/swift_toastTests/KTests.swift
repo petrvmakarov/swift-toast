@@ -1,8 +1,8 @@
 import Testing
 @testable import swift_toast
 
-@Suite("System helper")
-struct SystemHelperTests {
+@Suite("Constants")
+struct KTests {
     @Test("Liquid glass availability matches the operating system")
     func liquidGlassAvailability() {
         let expected: Bool
@@ -13,6 +13,6 @@ struct SystemHelperTests {
             expected = false
         }
 
-        #expect(SystemHelper.isLiquidGlassAvailable() == expected)
+        #expect(K.isLiquidGlassAvailable == expected)
     }
 }
