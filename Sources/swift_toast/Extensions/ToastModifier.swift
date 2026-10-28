@@ -12,13 +12,19 @@ public struct ToastModifier: ViewModifier {
     @State private var placement: ToastPlacement = .top
     @State private var disappearAfter: TimeInterval = 2.0
     @State private var dismissTask: DispatchWorkItem?
+    @State private var dragOffset: CGFloat = 0
     
     @State private var toastId: UUID = UUID()
     
     func onDismiss() {
+        dismissTask?.cancel()
+        dismissTask = nil
+
         withAnimation(.easeInOut) {
             self.type = nil
         }
+
+        dragOffset = 0
     }
     
     func onShow(
@@ -26,6 +32,8 @@ public struct ToastModifier: ViewModifier {
         placement: ToastPlacement,
         dismissAfter: TimeInterval
     ) {
+        dragOffset = 0
+
         withAnimation(.easeInOut) {
             self.type = type
             self.placement = placement
@@ -43,6 +51,36 @@ public struct ToastModifier: ViewModifier {
         self.dismissTask = task
         DispatchQueue.main.asyncAfter(deadline: .now() + disappearAfter + 1, execute: task)
     }
+
+    private var swipeToDismissGesture: some Gesture {
+        DragGesture(minimumDistance: 10)
+            .onChanged { value in
+                switch placement {
+                case .top:
+                    dragOffset = min(value.translation.height, 0)
+                case .bottom:
+                    dragOffset = max(value.translation.height, 0)
+                }
+            }
+            .onEnded { value in
+                let projectedDistance: CGFloat
+
+                switch placement {
+                case .top:
+                    projectedDistance = -value.predictedEndTranslation.height
+                case .bottom:
+                    projectedDistance = value.predictedEndTranslation.height
+                }
+
+                if projectedDistance > 80 {
+                    onDismiss()
+                } else {
+                    withAnimation(.spring(duration: 0.25)) {
+                        dragOffset = 0
+                    }
+                }
+            }
+    }
     
     public func body(content: Content) -> some View {
         content
@@ -50,6 +88,8 @@ public struct ToastModifier: ViewModifier {
                 Group {
                     if let type {
                         type.renderView()
+                            .offset(y: dragOffset)
+                            .gesture(swipeToDismissGesture)
                     }
                 }                
                 .transition(
