@@ -15,9 +15,14 @@ package enum K {
         return false
     }
 
-    enum Defaults {
-        static let liquidGlassEnabled = true
-        static let backgroundRegular = Color.adaptive(light: "#5E6168", dark: "#7A7A7A")
-        static let backgroundLiquidGlass: Color = .clear
+    package enum Defaults {
+        package static let dismissAfter: TimeInterval = 5.0
+        package static let liquidGlassEnabled = false
+        package static let backgroundRegular = Color.adaptive(light: "#5E6168", dark: "#222222")
+        package static let backgroundLiquidGlass: Color = .clear
+    }
+    
+    public enum IconSize {
+        public static let m: CGSize = .init(width: 28, height: 28)
     }
 }

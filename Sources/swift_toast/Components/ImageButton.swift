@@ -49,7 +49,7 @@ public struct ImageButton: View {
                 if !options.hideBackground {
                     Circle()
                         .fill(options.actualBackgroundColor)
-                        .frame(width: 28, height: 28)
+                        .frame(width: K.IconSize.m.width, height: K.IconSize.m.height)
                 }
                 source.image
                     .foregroundStyle(options.foregroundColor)

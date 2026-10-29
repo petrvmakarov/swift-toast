@@ -33,15 +33,9 @@ public struct ImageAccessory: View {
             source.image
                 .resizable()
                     .scaledToFit()
-                    .frame(width: 25, height: 25)
+                    .frame(width: K.IconSize.m.width, height: K.IconSize.m.height)
                     .foregroundStyle(options.foregroundColor)
         }
-        //.frame(maxHeight: 44)
-        //.frame(width: 44)
-        
-        //.background(.blue)
-        
-        //.padding(0)
     }
 }
 

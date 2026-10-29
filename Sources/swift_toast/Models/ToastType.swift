@@ -113,7 +113,8 @@ public struct ToastType {
         _ data: TData,
         _ presentationOptions: ToastPresentationOptions<TData>
     ) -> ToastType {
-        ToastType {
+        print("\(presentationOptions.messageViewOptions)")
+        return ToastType {
             AnyView(
                 ToastContainerView(
                     presentationOptions.messageViewOptions,

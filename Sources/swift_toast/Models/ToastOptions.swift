@@ -7,32 +7,32 @@
 
 import SwiftUI
 
-struct ColorWithLiquidGlass {
-    var regular: Color
-    var liquidGlass: Color
+package struct ColorWithLiquidGlass {
+    package var regular: Color
+    package var liquidGlass: Color
     
-    func getColor(for liquidGlassEnabled: Bool) -> Color {
+    package func getColor(for liquidGlassEnabled: Bool) -> Color {
         liquidGlassEnabled && K.isLiquidGlassAvailable ? liquidGlass : regular
     }
 }
 
 package struct ToastOptions {
-    var iconSystemName: String
-    var iconColor: Color
+    package var iconSystemName: String
+    package var iconColor: Color
     
-    var buttonSystemName: String
-    var buttonTint: Color
-    var buttonBackground: Color? = nil
+    package var buttonSystemName: String
+    package var buttonTint: Color
+    package var buttonBackground: Color? = nil
     
-    var titleFont: Font
-    var titleColor: ColorWithLiquidGlass
+    package var titleFont: Font
+    package var titleColor: ColorWithLiquidGlass
     
-    var messageFont: Font
-    var messageColor: ColorWithLiquidGlass
+    package var messageFont: Font
+    package var messageColor: ColorWithLiquidGlass
     
-    var background: ColorWithLiquidGlass
+    package var background: ColorWithLiquidGlass
     
-    var liquidGlassEnabled: Bool
+    package var liquidGlassEnabled: Bool
     
     public static var `default`: ToastOptions { ToastOptions(
         iconSystemName: "",
