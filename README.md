@@ -1,5 +1,10 @@
 # SwiftToast
 
+[![Version](https://img.shields.io/github/v/tag/petrvmakarov/swift-toast?sort=semver&label=version)](https://github.com/petrvmakarov/swift-toast/tags)
+[![Swift](https://img.shields.io/badge/Swift-6.4-F05138?logo=swift&logoColor=white)](https://swift.org)
+[![Platforms](https://img.shields.io/badge/platforms-iOS%2018%2B%20%7C%20Mac%20Catalyst%2018%2B-lightgrey?logo=apple)](https://github.com/petrvmakarov/swift-toast)
+[![License](https://img.shields.io/github/license/petrvmakarov/swift-toast)](https://github.com/petrvmakarov/swift-toast/blob/main/LICENSE)
+
 SwiftToast is a SwiftUI toast library for iOS and Mac Catalyst. It includes four predefined toast styles, fully custom toast content, top and bottom placement, automatic dismissal, animated transitions, Liquid Glass support, and optional swipe-to-dismiss behavior.
 
 ## Requirements
