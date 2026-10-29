@@ -6,9 +6,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A10000000000000000000001 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000011 /* ContentView.swift */; };
 		A10000000000000000000002 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000012 /* ExampleApp.swift */; };
-		A10000000000000000000003 /* swift-toast in Frameworks */ = {isa = PBXBuildFile; productRef = A10000000000000000000072 /* swift-toast */; };
+		A10000000000000000000003 /* ExampleAppFeature in Frameworks */ = {isa = PBXBuildFile; productRef = A10000000000000000000072 /* ExampleAppFeature */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,7 +20,7 @@
 		A10000000000000000000031 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
-			files = (A10000000000000000000003 /* swift-toast in Frameworks */,);
+			files = (A10000000000000000000003 /* ExampleAppFeature in Frameworks */,);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
@@ -56,7 +55,7 @@
 			buildRules = ();
 			dependencies = ();
 			name = ExampleApp;
-			packageProductDependencies = (A10000000000000000000072 /* swift-toast */,);
+			packageProductDependencies = (A10000000000000000000072 /* ExampleAppFeature */,);
 			productName = ExampleApp;
 			productReference = A10000000000000000000013 /* ExampleApp.app */;
 			productType = "com.apple.product-type.application";
@@ -101,7 +100,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A10000000000000000000001 /* ContentView.swift in Sources */,
 				A10000000000000000000002 /* ExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -210,10 +208,10 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A10000000000000000000072 /* swift-toast */ = {
+		A10000000000000000000072 /* ExampleAppFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A10000000000000000000071 /* XCLocalSwiftPackageReference ".." */;
-			productName = "swift-toast";
+			productName = ExampleAppFeature;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
