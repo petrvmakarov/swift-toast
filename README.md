@@ -5,7 +5,7 @@
 [![Platforms](https://img.shields.io/badge/platforms-iOS%2018%2B%20%7C%20Mac%20Catalyst%2018%2B-lightgrey?logo=apple)](https://github.com/petrvmakarov/swift-toast)
 [![License](https://img.shields.io/github/license/petrvmakarov/swift-toast)](https://github.com/petrvmakarov/swift-toast/blob/main/LICENSE)
 
-SwiftToast is a SwiftUI toast library for iOS and Mac Catalyst. It includes four predefined toast styles, fully custom toast content, top and bottom placement, automatic dismissal, animated transitions, Liquid Glass support, and optional swipe-to-dismiss behavior.
+SwiftToast is a SwiftUI toast library for iOS and Mac Catalyst. It includes four predefined toast styles, an undo toast with a countdown, fully custom toast content, top and bottom placement, automatic dismissal, animated transitions, Liquid Glass support, and optional swipe-to-dismiss behavior.
 
 ## Requirements
 
@@ -23,7 +23,7 @@ Add this repository as a Swift Package dependency in Xcode, or add it to `Packag
 dependencies: [
     .package(
         url: "https://github.com/petrvmakarov/swift-toast.git",
-        exact: "0.0.8"
+        exact: "0.0.9"
     )
 ]
 ```
@@ -83,6 +83,49 @@ showToast(.error(title: "Failed", message: "The request could not be completed."
 ```
 
 Both `title` and `message` are optional and accept any `StringProtocol` value.
+
+## Undo toast
+
+Use `ToastType.undo` to present an undo action with a countdown indicator. Keep the presentation duration and the countdown duration in sync, and dismiss the toast from the action after restoring the item:
+
+```swift
+struct DeletedItemToast: View {
+    @Environment(\.showToast) private var showToast
+    @Environment(\.dismissToast) private var dismissToast
+
+    private let undoDuration: TimeInterval = 10
+
+    var body: some View {
+        Button("Delete item") {
+            deleteItem()
+
+            showToast(
+                .undo(
+                    "Item deleted",
+                    message: "Tap to undo",
+                    options: .init(
+                        duration: undoDuration,
+                        liquidGlassEnabled: true,
+                        onButtonTap: {
+                            restoreItem()
+                            dismissToast()
+                        }
+                    )
+                ),
+                dismissAfter: undoDuration
+            )
+        }
+    }
+
+    private func deleteItem() {
+        // Delete the item.
+    }
+
+    private func restoreItem() {
+        // Restore the item.
+    }
+}
+```
 
 ## Placement and duration
 
@@ -315,6 +358,8 @@ ImageButton(
 | `showToast` | Presents a toast with optional placement and duration. |
 | `dismissToast` | Dismisses the visible toast. |
 | `ToastType` | Defines predefined or custom toast content. |
+| `ToastType.undo(_:message:options:)` | Presents an undo action with a countdown indicator. |
+| `ToastType.UndoOptions` | Configures undo duration, Liquid Glass, and button behavior. |
 | `ToastConfiguration` | Overrides predefined toast appearance and action behavior. |
 | `ToastConfiguration.ContainerOverrides` | Configures container layout and safe-area behavior. |
 | `ToastModifierOptions` | Enables or disables swipe-to-dismiss. |
@@ -324,7 +369,7 @@ ImageButton(
 
 ## Example app
 
-The `Example` directory contains an app demonstrating predefined styles, custom configuration, Liquid Glass, placement selection, and swipe-to-dismiss controls.
+The `Example` directory contains an app demonstrating predefined styles, undo actions, custom configuration, Liquid Glass, placement selection, and swipe-to-dismiss controls.
 
 ## License
 

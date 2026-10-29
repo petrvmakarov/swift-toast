@@ -16,8 +16,8 @@ public struct ShowToastAction {
     public func callAsFunction(
         _ type: ToastType,
         placement: ToastPlacement = .top,
-        dismissAfter: TimeInterval = 2.0
+        dismissAfter: TimeInterval? = nil
     ) {
-        action(type, placement, dismissAfter)
+        action(type, placement, dismissAfter ?? K.Defaults.dismissAfter)
     }
 }

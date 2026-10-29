@@ -10,10 +10,10 @@ import SwiftUI
 public struct ToastContainerViewOptions {
     public static var `default`: ToastContainerViewOptions { ToastContainerViewOptions(
         cornerRadius: 32,
-        backgroundColor: .clear,
+        backgroundColor: K.isLiquidGlassAvailable && K.Defaults.liquidGlassEnabled ? K.Defaults.backgroundLiquidGlass : K.Defaults.backgroundRegular,
         internalSpacing: 15,
         externalSpacing: 15,
-        liquidGlassEnabled: false,
+        liquidGlassEnabled: K.Defaults.liquidGlassEnabled,
         stretched: false,
         ignoreSafeArea: []
     ) }

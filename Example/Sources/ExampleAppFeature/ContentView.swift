@@ -1,6 +1,8 @@
 import SwiftUI
 import SwiftToast
 
+fileprivate let undoDismissAfter: TimeInterval = 10
+
 public struct ContentView: View {
     @State private var swipeToDismissEnabled = true
 
@@ -81,7 +83,6 @@ private struct ToastExamplesView: View {
         }
         
         Button {
-            //xmark.circle.fill
             showToast(
                 .error(title: "hello",
                        message: "from toast",
@@ -94,7 +95,6 @@ private struct ToastExamplesView: View {
         }
         
         Button {
-            //xmark.circle.fill
             showToast(
                 .error(title: "hello",
                        message: "from toast",
@@ -116,6 +116,24 @@ private struct ToastExamplesView: View {
             )
         } label: {
             Text("Error customized")
+        }
+        
+        Button {
+            showToast(
+                .undo("Item has been deleted",
+                      message: "tap to undo",
+                      options: .init(
+                        duration: undoDismissAfter,
+                        liquidGlassEnabled: isLiquidGlassEnabled,
+                        onButtonTap: {
+                    print("undo tapped!")
+                    dismissToast()
+                })
+                ),
+                dismissAfter: undoDismissAfter
+            )
+        } label: {
+            Text("Undo")
         }
     }
 }
