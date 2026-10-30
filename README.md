@@ -23,7 +23,7 @@ Add this repository as a Swift Package dependency in Xcode, or add it to `Packag
 dependencies: [
     .package(
         url: "https://github.com/petrvmakarov/swift-toast.git",
-        exact: "0.0.9"
+        exact: "0.1.0"
     )
 ]
 ```
