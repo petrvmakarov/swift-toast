@@ -17,7 +17,7 @@ package enum K {
 
     package enum Defaults {
         package static let dismissAfter: TimeInterval = 5.0
-        package static let liquidGlassEnabled = false
+        package static let liquidGlassEnabled = true
         package static let backgroundRegular = Color.adaptive(light: "#5E6168", dark: "#222222")
         package static let backgroundLiquidGlass: Color = .clear
     }
