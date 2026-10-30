@@ -130,6 +130,7 @@ private struct ToastExamplesView: View {
                     dismissToast()
                 })
                 ),
+                placement: toastPlacement,
                 dismissAfter: undoDismissAfter
             )
         } label: {
