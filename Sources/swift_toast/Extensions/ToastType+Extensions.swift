@@ -18,11 +18,13 @@ extension ToastType {
         
         var id: UUID = UUID()
         var duration: TimeInterval? = nil
+        var tint: Color? = nil
         var liquidGlassEnabled: Bool = K.Defaults.liquidGlassEnabled
         var onButtonTap: () -> Void
         
-        public init(duration: TimeInterval? = nil, liquidGlassEnabled: Bool, onButtonTap: @escaping () -> Void) {
+        public init(duration: TimeInterval? = nil, tint: Color? = nil, liquidGlassEnabled: Bool, onButtonTap: @escaping () -> Void) {
             self.duration = duration
+            self.tint = tint
             self.liquidGlassEnabled = liquidGlassEnabled
             self.onButtonTap = onButtonTap
         }
@@ -33,6 +35,11 @@ extension ToastType {
         let titleAndMessageOptions = ToastOptions.default
         let duration = options.duration ?? K.Defaults.dismissAfter
         let circleWidth: CGFloat = options.liquidGlassEnabled ? 0.9 : 3.5
+        
+        var tint: Color {
+            options.tint ?? .accentColor
+        }
+        
         return .custom(
             options,
             ToastPresentationOptions(
@@ -48,19 +55,16 @@ extension ToastType {
                         title: title,
                         message: message,
                         messageTitleSpacing: 0,
-                        titleColor: titleAndMessageOptions.titleColor.getColor(for: options.liquidGlassEnabled),
-                        messageColor: titleAndMessageOptions.messageColor.getColor(for: options.liquidGlassEnabled),
-                        titleFont: titleAndMessageOptions.titleFont,
-                        messageFont: titleAndMessageOptions.messageFont,
+                        options: titleAndMessageOptions,
                     )
                 },
                 renderLeftAccessory: { _ in
-                    CountdownView(value: duration, color: .blue, gapColor: .white, size: 44, lineWidth: circleWidth, gapWidth: 2, fontSize: 14, liquidGlassEnabled: options.liquidGlassEnabled,)
+                    CountdownView(value: duration, color: tint, gapColor: .white, size: 44, lineWidth: circleWidth, gapWidth: 2, fontSize: 14, liquidGlassEnabled: options.liquidGlassEnabled,)
                         .frame(width: K.IconSize.m.width, height: K.IconSize.m.height)
                 },
                 renderRightAccessory: { _ in ImageButton(
                     .systemName("arrow.uturn.backward"),
-                    withOptions: .init(foregroundColor: .blue)
+                    withOptions: .init(foregroundColor: tint)
                 ) {
                     options.onButtonTap()
                 } }

@@ -40,16 +40,10 @@ package struct ToastOptions {
         buttonSystemName: "xmark",
         buttonTint: .accentColor,
         buttonBackground: nil,
-        titleFont: .footnote.bold(),
-        titleColor: ColorWithLiquidGlass(
-            regular: .white,
-            liquidGlass: .primary
-        ),
-        messageFont: .footnote,
-        messageColor: ColorWithLiquidGlass(
-            regular: .white,
-            liquidGlass: .primary
-        ),
+        titleFont: K.Defaults.titleFont,
+        titleColor: K.Defaults.titleColor,
+        messageFont: K.Defaults.messageFont,
+        messageColor: K.Defaults.messageColor,
         background: ColorWithLiquidGlass(
             regular: K.Defaults.backgroundRegular,
             liquidGlass: K.Defaults.backgroundLiquidGlass
@@ -81,7 +75,7 @@ package struct ToastOptions {
         self.iconColor = iconColor ?? Self.default.iconColor
         self.buttonSystemName = buttonSystemName ?? ToastOptions.default.buttonSystemName
         self.buttonTint = buttonTint ?? Self.default.buttonTint
-        self.buttonBackground = buttonBackground// ?? Self.default.buttonBackground
+        self.buttonBackground = buttonBackground
         self.titleFont = titleFont ?? Self.default.titleFont
         self.titleColor = titleColor ?? Self.default.titleColor
         self.messageFont = messageFont ?? Self.default.messageFont

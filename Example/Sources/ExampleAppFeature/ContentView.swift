@@ -5,15 +5,15 @@ fileprivate let undoDismissAfter: TimeInterval = 10
 
 public struct ContentView: View {
     @State private var swipeToDismissEnabled = true
-
+    
     public init() {}
-
+    
     public var body: some View {
         VStack {
             Spacer()
             Toggle("Swipe to dismiss", isOn: $swipeToDismissEnabled)
                 .padding(.horizontal)
-
+            
             ToastExamplesView()
             Spacer()
         }
@@ -124,12 +124,13 @@ private struct ToastExamplesView: View {
                       message: "tap to undo",
                       options: .init(
                         duration: undoDismissAfter,
+                        tint: .cyan,
                         liquidGlassEnabled: isLiquidGlassEnabled,
                         onButtonTap: {
-                    print("undo tapped!")
-                    dismissToast()
-                })
-                ),
+                            print("undo tapped!")
+                            dismissToast()
+                        })
+                     ),
                 placement: toastPlacement,
                 dismissAfter: undoDismissAfter
             )
@@ -140,8 +141,6 @@ private struct ToastExamplesView: View {
 }
 
 #Preview {
-
-        ContentView()
-        
-    
+    ContentView()
+        .accentColor(.blue)
 }
