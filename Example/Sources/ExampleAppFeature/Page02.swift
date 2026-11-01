@@ -45,26 +45,26 @@ struct Page02: View {
         switch toastType {
         case .info:
                 .info(
-                    title: "hello",
-                    message: "from toast",
+                    title: "Hello",
+                    message: "This is a toast message.",
                     options: .init(liquidGlassEnabled: liquidGlassEnabled)
                 )
         case .success:
                 .success(
-                    title: "hello",
-                    message: "from toast",
+                    title: "Hello",
+                    message: "This is a toast message.",
                     options: .init(liquidGlassEnabled: liquidGlassEnabled)
                 )
         case .error:
                 .error(
-                    title: "hello",
-                    message: "from toast",
+                    title: "Hello",
+                    message: "This is a toast message.",
                     options: .init(liquidGlassEnabled: liquidGlassEnabled)
                 )
         case .warning:
                 .warning(
-                    title: "hello",
-                    message: "from toast",
+                    title: "Hello",
+                    message: "This is a toast message.",
                     options: .init(liquidGlassEnabled: liquidGlassEnabled)
                 )
         }
@@ -83,8 +83,8 @@ struct Page02: View {
         PageLayout(
             title: "Predefined toasts",
             instructions: """
-            Predefined toast types: .info, .success, .warning, .error
-            Available placemnt: .top, .bottom
+            Choose from four predefined toast types: .info, .success, .warning, and .error.
+            Available placements: .top and .bottom.
             """,
             code: code,
             codeMaxHeight: 320
@@ -116,13 +116,13 @@ struct Page02: View {
             }
 
             Stepper(
-                "Dismiss after \(Int(dismissAfter)) seconds",
+                dismissAfterLabel,
                 value: $dismissAfter,
                 in: 1...10,
                 step: 1
             )
             
-            Toggle("Enable liquid glass", isOn: $liquidGlassEnabled)
+            Toggle("Enable Liquid Glass", isOn: $liquidGlassEnabled)
 
             Button {
                 showToast(
@@ -130,7 +130,7 @@ struct Page02: View {
                     placement: toastPlacement == .top ? .top : .bottom,
                     dismissAfter: dismissAfter)
             } label: {
-                Text("Show message")
+                Text("Show toast")
             }.padding(.top)
         }
         .onAppear {
@@ -149,6 +149,12 @@ struct Page02: View {
             refreshCode()
         }
     }
+
+    private var dismissAfterLabel: String {
+        let seconds = Int(dismissAfter)
+        let unit = seconds == 1 ? "second" : "seconds"
+        return "Dismiss after \(seconds) \(unit)"
+    }
     
     private static func getCode(
         toastType: String,
@@ -159,8 +165,8 @@ struct Page02: View {
     Button {
      showToast(
         .\(toastType)(
-            title: "hello",
-            message: "from toast",
+            title: "Hello",
+            message: "This is a toast message.",
             options: .init(
                 liquidGlassEnabled: \(liquidGlass ? "true" : "false")
             )
@@ -168,7 +174,7 @@ struct Page02: View {
         placement: .\(placement),
         dismissAfter: \(Int(dismissAfter)))
     } label: {
-      Text("Show message")
+      Text("Show toast")
     }
     """
     }

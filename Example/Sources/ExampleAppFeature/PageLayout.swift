@@ -45,7 +45,7 @@ struct PageLayout<Content: View>: View {
 }
 
 #Preview {
-    PageLayout(title: "Hello world", code: """
+    PageLayout(title: "Hello World", code: """
         import Foundation
         
         func main() {

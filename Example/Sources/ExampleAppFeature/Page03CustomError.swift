@@ -18,8 +18,8 @@ struct Page03CustomError: View {
     @Environment(\.showToast) private var showToast
     
     var toastTypeObject: ToastType {
-        .error(title: "hello",
-               message: "from toast",
+        .error(title: "Hello",
+               message: "This is a toast message.",
                options: ToastConfiguration(
                 iconColor: .white,
                 buttonTint: .white,
@@ -70,7 +70,7 @@ struct Page03CustomError: View {
                     placement: toastPlacement == .top ? .top : .bottom,
                     dismissAfter: dismissAfter)
             } label: {
-                Text("Show message")
+                Text("Show toast")
             }.padding(.top)
         }
         .onAppear {
@@ -96,8 +96,8 @@ struct Page03CustomError: View {
     ) -> String { """
     Button {
      showToast(
-        .error(title: "hello",
-               message: "from toast",
+        .error(title: "Hello",
+               message: "This is a toast message.",
                options: .init(
                 iconColor: .white,
                 buttonTint: .white,
@@ -116,7 +116,7 @@ struct Page03CustomError: View {
         placement: .\(placement),
         dismissAfter: \(Int(dismissAfter)))
     } label: {
-      Text("Show message")
+      Text("Show toast")
     }
     """
     }

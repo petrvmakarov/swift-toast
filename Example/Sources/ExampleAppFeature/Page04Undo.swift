@@ -20,8 +20,8 @@ struct Page04Undo: View {
     @Environment(\.dismissToast) private var dismissToast
     
     var toastTypeObject: ToastType {
-        .undo("Item has been deleted",
-              message: "tap to undo",
+        .undo("Item was deleted",
+              message: "Tap to undo",
               options: .init(
                 duration: dismissAfter,
                 tint: .cyan,
@@ -42,7 +42,7 @@ struct Page04Undo: View {
     
     var body: some View {
         PageLayout(
-            title: "Custom error toast",
+            title: "Undo toast",
             code: code,
             codeMaxHeight: 480
         ) {
@@ -58,7 +58,7 @@ struct Page04Undo: View {
                 .pickerStyle(.menu)
             }
             
-            Toggle("Enable liquid glass", isOn: $liquidGlassEnabled)
+            Toggle("Enable Liquid Glass", isOn: $liquidGlassEnabled)
 
             Button {
                 showToast(
@@ -66,13 +66,13 @@ struct Page04Undo: View {
                     placement: toastPlacement == .top ? .top : .bottom,
                     dismissAfter: dismissAfter)
             } label: {
-                Text("Show message")
+                Text("Show toast")
             }.padding(.top)
         }
-        .alert("Undo", isPresented: $isUndoAlertPresented) {
+        .alert("Item restored", isPresented: $isUndoAlertPresented) {
             Button("OK", role: .cancel) {}
         } message: {
-            Text("Button pressed")
+            Text("The deleted item was restored.")
         }
         .onAppear {
             refreshCode()
@@ -100,8 +100,8 @@ struct Page04Undo: View {
 
     Button {
      showToast(
-        .undo("Item has been deleted",
-              message: "tap to undo",
+        .undo("Item was deleted",
+              message: "Tap to undo",
               options: .init(
                 duration: dismissAfter,
                 tint: .cyan,
@@ -114,12 +114,12 @@ struct Page04Undo: View {
         placement: .\(placement),
         dismissAfter: \(Int(dismissAfter)))
     } label: {
-      Text("Show message")
+      Text("Show toast")
     }
     .alert("Item restored", isPresented: $isUndoAlertPresented) {
         Button("OK", role: .cancel) {}
     } message: {
-        Text("The deletion was undone successfully.")
+        Text("The deleted item was restored.")
     }
     """
     }

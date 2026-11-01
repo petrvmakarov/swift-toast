@@ -11,12 +11,12 @@ struct Page01Setup: View {
     var body: some View {
         PageLayout(
             title: "Setup",
-            instructions: "1) invoke .withToast() modificator on the root view of your app",
+            instructions: "1. Apply .withToast() to the root view of your app.",
             code: Self.setupCode,
             codeMaxHeight: 220
         )
         PageLayout(
-            instructions: "2) use environment function 'showToast' to present your toast",
+            instructions: "2. Use the showToast environment action to present a toast.",
             code: Self.step02,
             codeMaxHeight: 220
         )
