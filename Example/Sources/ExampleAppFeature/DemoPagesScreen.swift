@@ -48,4 +48,5 @@ private extension DemoPagesScreen {
 
 #Preview {
     DemoPagesScreen()
+        .withToast()
 }

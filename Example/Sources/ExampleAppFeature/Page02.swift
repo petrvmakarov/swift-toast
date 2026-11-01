@@ -90,11 +90,23 @@ struct Page02: View {
             codeMaxHeight: 320
         ) {
             
+            HStack {
+                Text("Toast type")
+                Spacer()
+                Picker("Toast type", selection: $toastType) {
+                    ForEach(DemoToastType.allCases) { type in
+                        Text(type.title)
+                            .tag(type)
+                    }
+                }
+                .pickerStyle(.menu)
+            }
+            
             
             HStack {
                 Text("Placement")
                 Spacer()
-                Picker("Toast type", selection: $toastPlacement) {
+                Picker("Placement", selection: $toastPlacement) {
                     ForEach(DemoToastPlacement.allCases) { type in
                         Text(type.title)
                             .tag(type)

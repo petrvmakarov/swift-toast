@@ -49,7 +49,7 @@ struct Page04Undo: View {
             HStack {
                 Text("Placement")
                 Spacer()
-                Picker("Toast type", selection: $toastPlacement) {
+                Picker("Placement", selection: $toastPlacement) {
                     ForEach(DemoToastPlacement.allCases) { type in
                         Text(type.title)
                             .tag(type)
