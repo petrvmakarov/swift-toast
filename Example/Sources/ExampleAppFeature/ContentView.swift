@@ -6,15 +6,21 @@ public struct ContentView: View {
 
 #if DEBUG
     private let isReadmeDemo = ProcessInfo.processInfo.arguments.contains("--readme-demo")
+    private let isReadmeWalkthrough = ProcessInfo.processInfo.arguments.contains("--readme-walkthrough")
 #else
     private let isReadmeDemo = false
+    private let isReadmeWalkthrough = false
 #endif
 
     public init() {}
 
     @ViewBuilder
     public var body: some View {
-        if isReadmeDemo {
+        if isReadmeWalkthrough {
+            DemoPagesScreen(isAutomatedWalkthrough: true)
+                .preferredColorScheme(.dark)
+                .withToast()
+        } else if isReadmeDemo {
             ReadmeDemoScreen()
                 .withToast()
         } else {

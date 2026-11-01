@@ -40,6 +40,7 @@ struct Page02: View {
     @State private var code: String = ""
     
     @Environment(\.showToast) private var showToast
+    @Environment(\.walkthroughShowToastTrigger) private var walkthroughShowToastTrigger
     
     var toastTypeObject: ToastType {
         switch toastType {
@@ -124,12 +125,7 @@ struct Page02: View {
                 Toggle("Enable Liquid Glass", isOn: $liquidGlassEnabled)
             }
         } action: {
-            Button {
-                showToast(
-                    toastTypeObject,
-                    placement: toastPlacement == .top ? .top : .bottom,
-                    dismissAfter: dismissAfter)
-            } label: {
+            Button(action: presentToast) {
                 Label("Show toast", systemImage: "bell.badge.fill")
                     .frame(maxWidth: .infinity)
             }
@@ -151,6 +147,17 @@ struct Page02: View {
         .onChange(of: dismissAfter) {
             refreshCode()
         }
+        .onChange(of: walkthroughShowToastTrigger) { _, trigger in
+            guard trigger > 0 else { return }
+            presentToast()
+        }
+    }
+
+    private func presentToast() {
+        showToast(
+            toastTypeObject,
+            placement: toastPlacement == .top ? .top : .bottom,
+            dismissAfter: dismissAfter)
     }
 
     private var dismissAfterLabel: String {

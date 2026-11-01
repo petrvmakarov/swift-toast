@@ -18,6 +18,7 @@ struct Page04Undo: View {
     
     @Environment(\.showToast) private var showToast
     @Environment(\.dismissToast) private var dismissToast
+    @Environment(\.walkthroughShowToastTrigger) private var walkthroughShowToastTrigger
     
     var toastTypeObject: ToastType {
         .undo("Item was deleted",
@@ -62,12 +63,7 @@ struct Page04Undo: View {
                 Toggle("Enable Liquid Glass", isOn: $liquidGlassEnabled)
             }
         } action: {
-            Button {
-                showToast(
-                    toastTypeObject,
-                    placement: toastPlacement == .top ? .top : .bottom,
-                    dismissAfter: dismissAfter)
-            } label: {
+            Button(action: presentToast) {
                 Label("Show toast", systemImage: "bell.badge.fill")
                     .frame(maxWidth: .infinity)
             }
@@ -94,6 +90,17 @@ struct Page04Undo: View {
         .onChange(of: dismissAfter) {
             refreshCode()
         }
+        .onChange(of: walkthroughShowToastTrigger) { _, trigger in
+            guard trigger > 0 else { return }
+            presentToast()
+        }
+    }
+
+    private func presentToast() {
+        showToast(
+            toastTypeObject,
+            placement: toastPlacement == .top ? .top : .bottom,
+            dismissAfter: dismissAfter)
     }
     
     private static func getCode(

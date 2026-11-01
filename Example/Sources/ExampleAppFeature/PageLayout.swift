@@ -7,6 +7,67 @@
 
 import SwiftUI
 
+enum WalkthroughScrollTarget: Equatable {
+    case top
+    case bottom
+}
+
+private struct WalkthroughScrollTargetKey: EnvironmentKey {
+    static let defaultValue: WalkthroughScrollTarget? = nil
+}
+
+private struct WalkthroughShowToastTriggerKey: EnvironmentKey {
+    static let defaultValue = 0
+}
+
+extension EnvironmentValues {
+    var walkthroughScrollTarget: WalkthroughScrollTarget? {
+        get { self[WalkthroughScrollTargetKey.self] }
+        set { self[WalkthroughScrollTargetKey.self] = newValue }
+    }
+
+    var walkthroughShowToastTrigger: Int {
+        get { self[WalkthroughShowToastTriggerKey.self] }
+        set { self[WalkthroughShowToastTriggerKey.self] = newValue }
+    }
+}
+
+struct WalkthroughScrollView<Content: View>: View {
+    @Environment(\.walkthroughScrollTarget) private var walkthroughScrollTarget
+    private let content: Content
+
+    init(@ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
+
+    var body: some View {
+        ScrollViewReader { proxy in
+            ScrollView {
+                Color.clear
+                    .frame(height: 1)
+                    .id(WalkthroughScrollTarget.top)
+
+                content
+                    .frame(maxWidth: .infinity, alignment: .top)
+
+                Color.clear
+                    .frame(height: 1)
+                    .id(WalkthroughScrollTarget.bottom)
+            }
+            .onChange(of: walkthroughScrollTarget, initial: true) { _, target in
+                guard let target else { return }
+
+                withAnimation(.easeInOut(duration: 2.5)) {
+                    proxy.scrollTo(
+                        target,
+                        anchor: target == .top ? .top : .bottom
+                    )
+                }
+            }
+        }
+    }
+}
+
 struct PageLayout<Content: View>: View {
     private var title: String? = nil
     private var instructions: String? = nil
@@ -45,6 +106,8 @@ struct PageLayout<Content: View>: View {
 }
 
 struct PinnedActionPage<Content: View, Action: View>: View {
+    @Environment(\.walkthroughScrollTarget) private var walkthroughScrollTarget
+
     private let content: Content
     private let action: Action
 
@@ -57,9 +120,29 @@ struct PinnedActionPage<Content: View, Action: View>: View {
     }
 
     var body: some View {
-        ScrollView {
-            content
-                .frame(maxWidth: .infinity, alignment: .top)
+        ScrollViewReader { proxy in
+            ScrollView {
+                Color.clear
+                    .frame(height: 1)
+                    .id(WalkthroughScrollTarget.top)
+
+                content
+                    .frame(maxWidth: .infinity, alignment: .top)
+
+                Color.clear
+                    .frame(height: 1)
+                    .id(WalkthroughScrollTarget.bottom)
+            }
+            .onChange(of: walkthroughScrollTarget, initial: true) { _, target in
+                guard let target else { return }
+
+                withAnimation(.easeInOut(duration: 2.5)) {
+                    proxy.scrollTo(
+                        target,
+                        anchor: target == .top ? .top : .bottom
+                    )
+                }
+            }
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
             action
