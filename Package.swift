@@ -38,6 +38,10 @@ let package = Package(
             name: "ExampleAppFeature",
             dependencies: ["SwiftToast"],
             path: "Example/Sources/ExampleAppFeature",
+            resources: [
+                .copy("CodeHighlight"),
+                .process("Assets.xcassets"),
+            ],
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency"),
             ],

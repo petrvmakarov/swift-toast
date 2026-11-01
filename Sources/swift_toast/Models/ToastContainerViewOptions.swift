@@ -35,7 +35,7 @@ public struct ToastContainerViewOptions {
         stretched: Bool? = nil,
         ignoreSafeArea: Edge.Set? = nil
     ) {
-        self.backgroundColor = backgroundColor ?? Self.default.backgroundColor
+        self.backgroundColor = backgroundColor ?? ((liquidGlassEnabled ?? false) ? K.Defaults.backgroundLiquidGlass : K.Defaults.backgroundRegular)
         self.cornerRadius = cornerRadius ?? Self.default.cornerRadius
         self.internalSpacing = internalSpacing ?? Self.default.internalSpacing
         self.externalSpacing = externalSpacing ?? Self.default.externalSpacing

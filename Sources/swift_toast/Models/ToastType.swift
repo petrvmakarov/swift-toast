@@ -155,10 +155,7 @@ public struct ToastType {
                             title: title,
                             message: message,
                             messageTitleSpacing: 0,
-                            titleColor: options.titleColor.getColor(for: options.liquidGlassEnabled),
-                            messageColor: options.messageColor.getColor(for: options.liquidGlassEnabled),
-                            titleFont: options.titleFont,
-                            messageFont: options.messageFont,
+                            options: options
                         )
                     },
                     leftAccessory: {

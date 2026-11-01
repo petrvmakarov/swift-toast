@@ -13,10 +13,11 @@ package struct TitleAndMessageView: View {
     var titleLinesLimit: Int? = nil
     var messageLinesLimit: Int? = nil
     var messageTitleSpacing: CGFloat? = nil
-    var titleColor: Color = .primary
-    var messageColor: Color = .primary
-    var titleFont: Font = .footnote.bold()
-    var messageFont: Font = .footnote.bold()
+    var titleColor: Color
+    var messageColor: Color
+    var titleFont: Font
+    var messageFont: Font
+    var toastOptions: ToastOptions? = ToastOptions.default
 
     package init(
         title: (any StringProtocol)? = nil,
@@ -24,20 +25,17 @@ package struct TitleAndMessageView: View {
         titleLinesLimit: Int? = nil,
         messageLinesLimit: Int? = nil,
         messageTitleSpacing: CGFloat? = nil,
-        titleColor: Color = .primary,
-        messageColor: Color = .primary,
-        titleFont: Font = .footnote.bold(),
-        messageFont: Font = .footnote.bold(),
+        options: ToastOptions = ToastOptions.default
     ) {
         self.title = title
         self.message = message
         self.titleLinesLimit = titleLinesLimit
         self.messageLinesLimit = messageLinesLimit
         self.messageTitleSpacing = messageTitleSpacing
-        self.titleColor = titleColor
-        self.messageColor = messageColor
-        self.titleFont = titleFont
-        self.messageFont = messageFont
+        self.titleColor = options.titleColor.getColor(for: options.liquidGlassEnabled)
+        self.messageColor = options.messageColor.getColor(for: options.liquidGlassEnabled)
+        self.titleFont = options.titleFont
+        self.messageFont = options.messageFont
     }
     
     package var body: some View {
