@@ -33,7 +33,7 @@ enum DemoToastPlacement: String, CaseIterable, Identifiable {
 }
 
 struct Page02: View {
-    @State private var liquidGlassEnabled: Bool = false
+    @State private var liquidGlassEnabled: Bool = true
     @State private var toastType: DemoToastType = .info
     @State private var toastPlacement: DemoToastPlacement = .top
     @State private var dismissAfter: TimeInterval = 5

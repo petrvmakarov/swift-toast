@@ -40,6 +40,7 @@ let package = Package(
             path: "Example/Sources/ExampleAppFeature",
             resources: [
                 .copy("CodeHighlight"),
+                .process("Assets.xcassets"),
             ],
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency"),
