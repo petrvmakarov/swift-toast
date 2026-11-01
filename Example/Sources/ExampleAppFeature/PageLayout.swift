@@ -28,19 +28,55 @@ struct PageLayout<Content: View>: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 12) {
             if let title, !title.isEmpty {
                 Header(title)
             }
             if let instructions, !instructions.isEmpty {
-                Text(instructions)
-                    .font(.body)
+                InstructionCard(text: instructions)
             }
             CodeView(code: code)
+                .frame(maxWidth: .infinity)
                 .frame(height: codeMaxHeight)
             content
         }
         .padding()
+    }
+}
+
+private struct InstructionCard: View {
+    let text: String
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: "lightbulb.fill")
+                .font(.callout.weight(.semibold))
+                .foregroundStyle(.tint)
+                .frame(width: 28, height: 28)
+                .background(Color.accentColor.opacity(0.12), in: Circle())
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text("QUICK GUIDE")
+                    .font(.caption2.weight(.bold))
+                    .tracking(1.1)
+                    .foregroundStyle(.tint)
+
+                Text(text)
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                    .lineSpacing(4)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .padding(12)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                .stroke(Color.primary.opacity(0.07), lineWidth: 1)
+        }
+        .accessibilityElement(children: .combine)
     }
 }
 
