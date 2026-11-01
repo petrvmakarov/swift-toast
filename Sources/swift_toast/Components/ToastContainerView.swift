@@ -172,7 +172,7 @@ package struct ToastContainerView<
     private var liquidGlassBody: some View {
         internalBody
             .glassEffect(
-                .clear
+                .regular
                     .tint(options.backgroundColor)
                     .interactive(),
                 in: .rect(cornerSize: .init(width: options.cornerRadius, height: options.cornerRadius)))

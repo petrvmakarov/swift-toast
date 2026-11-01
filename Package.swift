@@ -38,6 +38,9 @@ let package = Package(
             name: "ExampleAppFeature",
             dependencies: ["SwiftToast"],
             path: "Example/Sources/ExampleAppFeature",
+            resources: [
+                .copy("CodeHighlight"),
+            ],
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency"),
             ],
