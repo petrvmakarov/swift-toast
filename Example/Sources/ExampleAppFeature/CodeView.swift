@@ -6,9 +6,40 @@
 //
 
 import SwiftUI
+import UIKit
 import WebKit
 
-struct CodeView: UIViewRepresentable {
+struct CodeView: View {
+    let code: String
+    @State private var isCopied = false
+
+    var body: some View {
+        CodeWebView(code: code)
+            .overlay(alignment: .topTrailing) {
+                Button {
+                    UIPasteboard.general.string = code
+                    isCopied = true
+                } label: {
+                    Label(
+                        isCopied ? "Copied" : "Copy",
+                        systemImage: isCopied ? "checkmark" : "doc.on.doc"
+                    )
+                    .font(.caption.weight(.semibold))
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 7)
+                    .background(.regularMaterial, in: Capsule())
+                }
+                .buttonStyle(.plain)
+                .padding(10)
+                .accessibilityHint("Copies the displayed code to the clipboard")
+            }
+            .onChange(of: code) {
+                isCopied = false
+            }
+    }
+}
+
+private struct CodeWebView: UIViewRepresentable {
     let code: String
 
     func makeCoordinator() -> Coordinator {
