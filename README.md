@@ -9,23 +9,32 @@ SwiftToast is a SwiftUI toast library for iOS and Mac Catalyst. It includes four
 
 ## Demo
 
-<p align="center">
-  <a href="docs/media/swift-toast-demo.mp4">
-    <img src="docs/media/swift-toast-demo.gif" width="320" alt="SwiftToast demo showing information, success, warning, error, and undo toasts">
-  </a>
-</p>
-
-<p align="center"><sub>Information, success, warning, error, and bottom-placed undo toasts. Click the demo to open the MP4.</sub></p>
-
-### Example app walkthrough
-
-<p align="center">
-  <a href="docs/media/example-app-dark-walkthrough.mp4">
-    <img src="docs/media/example-app-dark-walkthrough.gif" width="320" alt="Dark-mode walkthrough of all four SwiftToast example app screens">
-  </a>
-</p>
-
-<p align="center"><sub>A dark-mode walkthrough of every example screen and its toast action. Click the preview to open the MP4.</sub></p>
+<table>
+  <tr>
+    <th align="center">Toast demo</th>
+    <th align="center">Example app walkthrough</th>
+  </tr>
+  <tr>
+    <td align="center" valign="top">
+      <a href="docs/media/swift-toast-demo.mp4">
+        <img src="docs/media/swift-toast-demo.gif" width="300" alt="SwiftToast demo showing information, success, warning, error, and undo toasts">
+      </a>
+    </td>
+    <td align="center" valign="top">
+      <a href="docs/media/example-app-dark-walkthrough.mp4">
+        <img src="docs/media/example-app-dark-walkthrough.gif" width="300" alt="Dark-mode walkthrough of all four SwiftToast example app screens">
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">
+      <sub>Information, success, warning, error, and bottom-placed undo toasts. Click the preview to open the MP4.</sub>
+    </td>
+    <td align="center" valign="top">
+      <sub>A dark-mode walkthrough of every example screen and its toast action. Click the preview to open the MP4.</sub>
+    </td>
+  </tr>
+</table>
 
 ## Requirements
 
