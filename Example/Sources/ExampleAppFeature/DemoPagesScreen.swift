@@ -15,13 +15,13 @@ struct DemoPagesScreen: View {
             page(Page01Setup())
                 .tag(Page.setup)
 
-            page(Page02())
+            Page02()
                 .tag(Page.predefinedToasts)
 
-            page(Page03CustomError())
+            Page03CustomError()
                 .tag(Page.customError)
 
-            page(Page04Undo())
+            Page04Undo()
                 .tag(Page.undo)
         }
         .tabViewStyle(.page(indexDisplayMode: .always))

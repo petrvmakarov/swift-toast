@@ -80,58 +80,61 @@ struct Page02: View {
     }
     
     var body: some View {
-        PageLayout(
-            title: "Predefined toasts",
-            instructions: """
-            Choose from four predefined toast types: .info, .success, .warning, and .error.
-            Available placements: .top and .bottom.
-            """,
-            code: code,
-            codeMaxHeight: 320
-        ) {
-            
-            HStack {
-                Text("Toast type")
-                Spacer()
-                Picker("Toast type", selection: $toastType) {
-                    ForEach(DemoToastType.allCases) { type in
-                        Text(type.title)
-                            .tag(type)
+        PinnedActionPage {
+            PageLayout(
+                title: "Predefined toasts",
+                instructions: """
+                Choose from four predefined toast types: .info, .success, .warning, and .error.
+                Available placements: .top and .bottom.
+                """,
+                code: code,
+                codeMaxHeight: 320
+            ) {
+                HStack {
+                    Text("Toast type")
+                    Spacer()
+                    Picker("Toast type", selection: $toastType) {
+                        ForEach(DemoToastType.allCases) { type in
+                            Text(type.title)
+                                .tag(type)
+                        }
                     }
+                    .pickerStyle(.menu)
                 }
-                .pickerStyle(.menu)
-            }
-            
-            
-            HStack {
-                Text("Placement")
-                Spacer()
-                Picker("Placement", selection: $toastPlacement) {
-                    ForEach(DemoToastPlacement.allCases) { type in
-                        Text(type.title)
-                            .tag(type)
+
+                HStack {
+                    Text("Placement")
+                    Spacer()
+                    Picker("Placement", selection: $toastPlacement) {
+                        ForEach(DemoToastPlacement.allCases) { type in
+                            Text(type.title)
+                                .tag(type)
+                        }
                     }
+                    .pickerStyle(.menu)
                 }
-                .pickerStyle(.menu)
+
+                Stepper(
+                    dismissAfterLabel,
+                    value: $dismissAfter,
+                    in: 1...10,
+                    step: 1
+                )
+
+                Toggle("Enable Liquid Glass", isOn: $liquidGlassEnabled)
             }
-
-            Stepper(
-                dismissAfterLabel,
-                value: $dismissAfter,
-                in: 1...10,
-                step: 1
-            )
-            
-            Toggle("Enable Liquid Glass", isOn: $liquidGlassEnabled)
-
+        } action: {
             Button {
                 showToast(
                     toastTypeObject,
                     placement: toastPlacement == .top ? .top : .bottom,
                     dismissAfter: dismissAfter)
             } label: {
-                Text("Show toast")
-            }.padding(.top)
+                Label("Show toast", systemImage: "bell.badge.fill")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
         }
         .onAppear {
             refreshCode()

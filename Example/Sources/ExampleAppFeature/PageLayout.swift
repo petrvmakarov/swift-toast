@@ -44,6 +44,33 @@ struct PageLayout<Content: View>: View {
     }
 }
 
+struct PinnedActionPage<Content: View, Action: View>: View {
+    private let content: Content
+    private let action: Action
+
+    init(
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder action: () -> Action
+    ) {
+        self.content = content()
+        self.action = action()
+    }
+
+    var body: some View {
+        ScrollView {
+            content
+                .frame(maxWidth: .infinity, alignment: .top)
+        }
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            action
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 16)
+                .padding(.top, 10)
+                .padding(.bottom, 42)
+        }
+    }
+}
+
 private struct InstructionCard: View {
     let text: String
 

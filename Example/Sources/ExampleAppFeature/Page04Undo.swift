@@ -41,33 +41,38 @@ struct Page04Undo: View {
     }
     
     var body: some View {
-        PageLayout(
-            title: "Undo toast",
-            code: code,
-            codeMaxHeight: 480
-        ) {
-            HStack {
-                Text("Placement")
-                Spacer()
-                Picker("Placement", selection: $toastPlacement) {
-                    ForEach(DemoToastPlacement.allCases) { type in
-                        Text(type.title)
-                            .tag(type)
+        PinnedActionPage {
+            PageLayout(
+                title: "Undo toast",
+                code: code,
+                codeMaxHeight: 480
+            ) {
+                HStack {
+                    Text("Placement")
+                    Spacer()
+                    Picker("Placement", selection: $toastPlacement) {
+                        ForEach(DemoToastPlacement.allCases) { type in
+                            Text(type.title)
+                                .tag(type)
+                        }
                     }
+                    .pickerStyle(.menu)
                 }
-                .pickerStyle(.menu)
-            }
-            
-            Toggle("Enable Liquid Glass", isOn: $liquidGlassEnabled)
 
+                Toggle("Enable Liquid Glass", isOn: $liquidGlassEnabled)
+            }
+        } action: {
             Button {
                 showToast(
                     toastTypeObject,
                     placement: toastPlacement == .top ? .top : .bottom,
                     dismissAfter: dismissAfter)
             } label: {
-                Text("Show toast")
-            }.padding(.top)
+                Label("Show toast", systemImage: "bell.badge.fill")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
         }
         .alert("Item restored", isPresented: $isUndoAlertPresented) {
             Button("OK", role: .cancel) {}

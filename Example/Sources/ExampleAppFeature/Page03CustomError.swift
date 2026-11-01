@@ -45,33 +45,36 @@ struct Page03CustomError: View {
     }
     
     var body: some View {
-        PageLayout(
-            title: "Custom error toast",
-            code: code,
-            codeMaxHeight: 420
-        ) {
-            
-            
-            HStack {
-                Text("Placement")
-                Spacer()
-                Picker("Placement", selection: $toastPlacement) {
-                    ForEach(DemoToastPlacement.allCases) { type in
-                        Text(type.title)
-                            .tag(type)
+        PinnedActionPage {
+            PageLayout(
+                title: "Custom error toast",
+                code: code,
+                codeMaxHeight: 420
+            ) {
+                HStack {
+                    Text("Placement")
+                    Spacer()
+                    Picker("Placement", selection: $toastPlacement) {
+                        ForEach(DemoToastPlacement.allCases) { type in
+                            Text(type.title)
+                                .tag(type)
+                        }
                     }
+                    .pickerStyle(.menu)
                 }
-                .pickerStyle(.menu)
             }
-
+        } action: {
             Button {
                 showToast(
                     toastTypeObject,
                     placement: toastPlacement == .top ? .top : .bottom,
                     dismissAfter: dismissAfter)
             } label: {
-                Text("Show toast")
-            }.padding(.top)
+                Label("Show toast", systemImage: "bell.badge.fill")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
         }
         .onAppear {
             refreshCode()
