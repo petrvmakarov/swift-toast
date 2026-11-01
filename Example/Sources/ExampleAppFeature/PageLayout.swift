@@ -66,7 +66,7 @@ struct PinnedActionPage<Content: View, Action: View>: View {
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, 16)
                 .padding(.top, 10)
-                .padding(.bottom, 42)
+                .padding(.bottom, 58)
         }
     }
 }
