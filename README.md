@@ -7,6 +7,16 @@
 
 SwiftToast is a SwiftUI toast library for iOS and Mac Catalyst. It includes four predefined toast styles, an undo toast with a countdown, fully custom toast content, top and bottom placement, automatic dismissal, animated transitions, Liquid Glass support, and optional swipe-to-dismiss behavior.
 
+## Demo
+
+<p align="center">
+  <a href="docs/media/swift-toast-demo.mp4">
+    <img src="docs/media/swift-toast-demo.gif" width="320" alt="SwiftToast demo showing information, success, warning, error, and undo toasts">
+  </a>
+</p>
+
+<p align="center"><sub>Information, success, warning, error, and bottom-placed undo toasts. Click the demo to open the MP4.</sub></p>
+
 ## Requirements
 
 - Swift 6.4+

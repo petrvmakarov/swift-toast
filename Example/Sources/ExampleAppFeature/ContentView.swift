@@ -4,19 +4,31 @@ import SwiftUI
 public struct ContentView: View {
     @State private var isSplashPresented = true
 
+#if DEBUG
+    private let isReadmeDemo = ProcessInfo.processInfo.arguments.contains("--readme-demo")
+#else
+    private let isReadmeDemo = false
+#endif
+
     public init() {}
 
+    @ViewBuilder
     public var body: some View {
-        ZStack {
-            DemoPagesScreen()
+        if isReadmeDemo {
+            ReadmeDemoScreen()
+                .withToast()
+        } else {
+            ZStack {
+                DemoPagesScreen()
 
-            if isSplashPresented {
-                splashScreen
-                    .transition(.opacity)
-                    .zIndex(1)
+                if isSplashPresented {
+                    splashScreen
+                        .transition(.opacity)
+                        .zIndex(1)
+                }
             }
-        }
             .withToast()
+        }
     }
 
     private var splashScreen: some View {
